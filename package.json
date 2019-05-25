@@ -1,0 +1,19 @@
+{
+  "name": "apollo-aperture",
+  "version": "0.1.0",
+  "description": "Get information about your Apollo React project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-snape/apollo-aperture.git"
+  },
+  "author": "Mike Huynh, Steven Jung, Raffi Nakashian, Jonathan Peralez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/team-snape/apollo-aperture/issues"
+  },
+  "homepage": "https://github.com/team-snape/apollo-aperture#readme"
+}
