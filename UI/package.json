@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/lumber-exotics/custom-store.git"
   },
-  "author": "Authors Mike Huynh, Steven Jung, Raffi, Jonathan Peralez",
+  "author": "Original Authors Mike Huynh, Steven Jung, Jonathan Peralez | Contributors Mike Huynh, Jay Lim, Johnny Lim, Sam Ryoo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lumber-exotics/custom-store/issues"
@@ -26,6 +26,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
+    "@material-ui/styles": "^4.0.1",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link-state": "^0.4.2",
@@ -35,15 +36,12 @@
     "cookie-parser": "^1.4.4",
     "css-loader": "^2.1.1",
     "express": "^4.16.4",
-    "file-system": "^2.2.2",
     "flexboxgrid": "^6.3.1",
-    "glob": "^7.1.4",
+    "font-awesome": "^4.7.0",
     "graphql": "^14.3.0",
     "graphql-tag": "^2.10.1",
-    "history": "^4.9.0",
     "jest": "^24.7.1",
     "lodash": "^4.17.11",
-    "nodemon": "^1.19.1",
     "pg": "^7.10.0",
     "prop-types": "^15.7.2",
     "puppeteer": "^1.15.0",
@@ -53,7 +51,6 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.2",
     "react-router-dom": "^5.0.0",
-    "recharts": "^1.6.2",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
