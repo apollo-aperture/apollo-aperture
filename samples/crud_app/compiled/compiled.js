@@ -7,9 +7,9 @@ import { ApolloProvider } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { find } from 'lodash';
-import {Query} from 'react-apollo';
-import {CSVLink} from 'react-csv';
-  
+import { Query } from 'react-apollo';
+import { CSVLink } from 'react-csv';
+
 
 // cache, Schema, and Apollo Store
 const cache = new InMemoryCache();
@@ -53,8 +53,6 @@ export const typeDefs = `
 `;
 
 
-
-
 // from user.js
 const TOGGLE_USER = gql`
   mutation ToggleUser($id: Int!) {
@@ -71,56 +69,56 @@ const DELETE_USER = gql`
 `;
 
 const User = ({
-  id,
-  completed,
-  name,
-  userName,
-  department,
-  access,
-  handelEditCard,
-}) => (
-  <Mutation mutation={TOGGLE_USER} variables={{ id }}>
-    {toggleUser => (
+                id,
+                completed,
+                name,
+                userName,
+                department,
+                access,
+                handelEditCard,
+              }) => (
+  <Mutation mutation={ TOGGLE_USER } variables={ { id } }>
+    { toggleUser => (
       <div
         className="card"
-        style={{
+        style={ {
           opacity: completed ? '0.5' : '1',
-        }}
+        } }
       >
         <header className="card-header">
           <p className="card-header-title">
-            {name}
+            { name }
             (@
-            {userName})
+            { userName })
           </p>
         </header>
         <div className="card-content">
           <h1>
-            {' '}
-            <strong>Departement-</strong> {department}
+            { ' ' }
+            <strong>Departement-</strong> { department }
           </h1>
           <h1>
-            {' '}
-            <strong>Access-</strong> {access}
+            { ' ' }
+            <strong>Access-</strong> { access }
           </h1>
         </div>
         <footer className="card-footer">
-          <a onClick={toggleUser} className="card-footer-item">
-            {completed ? 'Activate' : 'Deactivate'}
+          <a onClick={ toggleUser } className="card-footer-item">
+            { completed ? 'Activate' : 'Deactivate' }
           </a>
-          <a className="card-footer-item" onClick={() => handelEditCard(id)}>
+          <a className="card-footer-item" onClick={ () => handelEditCard(id) }>
             Edit
           </a>
-          <Mutation mutation={DELETE_USER} variables={{ id }}>
-            {deleteUser => (
-              <a onClick={() => deleteUser()} className="card-footer-item">
+          <Mutation mutation={ DELETE_USER } variables={ { id } }>
+            { deleteUser => (
+              <a onClick={ () => deleteUser() } className="card-footer-item">
                 Delete
               </a>
-            )}
+            ) }
           </Mutation>
         </footer>
       </div>
-    )}
+    ) }
   </Mutation>
 );
 
@@ -138,13 +136,14 @@ class UserForm2 extends React.Component {
     this.handelChange = this.handelChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   //onchange to get varibales from form
   handelChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [ e.target.name ]: e.target.value });
   };
 
-  handleSubmit(e){
- 
+  handleSubmit(e) {
+
     e.preventDefault();
     this.props.handleSubmit({ variables: { ...this.state } });
   };
@@ -159,7 +158,7 @@ class UserForm2 extends React.Component {
               className="input"
               type="text"
               name="name"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -170,7 +169,7 @@ class UserForm2 extends React.Component {
               className="input"
               type="text"
               name="userName"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -181,7 +180,7 @@ class UserForm2 extends React.Component {
               className="input"
               type="text"
               name="department"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -192,14 +191,14 @@ class UserForm2 extends React.Component {
               className="input"
               type="text"
               name="access"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
         <button
           className="button is-primary"
           type="submit"
-          onClick={this.handleSubmit}
+          onClick={ this.handleSubmit }
         >
           Submit
         </button>
@@ -247,7 +246,7 @@ const resolvers = {
         __typename: 'UserItem',
       };
       const data = {
-        users: previous.users.concat([newUser]),
+        users: previous.users.concat([ newUser ]),
       };
 
       // if (
@@ -258,13 +257,13 @@ const resolvers = {
       // ) {
       //   alert('all field is required');
       // } else {
-        // user Name Validation
-        const validation = previous.users.find(
-          user => user.userName === userName,
-        );
-        // if (validation === undefined) {
-          cache.writeData({ data });
-          return newUser;
+      // user Name Validation
+      const validation = previous.users.find(
+        user => user.userName === userName,
+      );
+      // if (validation === undefined) {
+      cache.writeData({ data });
+      return newUser;
       //   }
       //   alert('user name is already in use');
       // // }
@@ -283,7 +282,7 @@ const resolvers = {
           }
         }
       `;
-      const id = `UserItem:${variables.id}`;
+      const id = `UserItem:${ variables.id }`;
       const previous = cache.readQuery({ query });
       // user Name Validation
       const validation = previous.users.find(user => {
@@ -311,7 +310,7 @@ const resolvers = {
           }
         }
       `;
-  
+
       const previous = cache.readQuery({ query });
       const data = {
         users: previous.users.filter(user => user.id !== variables.id),
@@ -321,7 +320,7 @@ const resolvers = {
     },
 
     toggleUser: (_, variables, { cache }) => {
-      const id = `UserItem:${variables.id}`;
+      const id = `UserItem:${ variables.id }`;
       const fragment = gql`
         fragment completeUser on UserItem {
           completed
@@ -379,36 +378,35 @@ const UPDATE_USER = gql`
 `;
 
 
-
 const UserForm = ({ userId, users, handelEditCard }) => {
-    const user = find(users, user => user.id === userId);
-    if (userId === null) {
-      return (
-        <Mutation mutation={ADD_USER}>
-          {addUser => (
-            <div>
-              <h1 className="title">Add User</h1>
-              <UserForm2 handleSubmit={addUser} />
-            </div>
-          )}
-        </Mutation>
-      );
-    }
+  const user = find(users, user => user.id === userId);
+  if (userId === null) {
     return (
-      <Mutation mutation={UPDATE_USER}>
-        {updateUser => (
+      <Mutation mutation={ ADD_USER }>
+        { addUser => (
           <div>
-            <h1 className="title">Update User</h1>
-            <UserUpdateForm
-              handleSubmit={updateUser}
-              user={user}
-              handelEditCard={handelEditCard}
-            />
+            <h1 className="title">Add User</h1>
+            <UserForm2 handleSubmit={ addUser }/>
           </div>
-        )}
+        ) }
       </Mutation>
     );
-  };
+  }
+  return (
+    <Mutation mutation={ UPDATE_USER }>
+      { updateUser => (
+        <div>
+          <h1 className="title">Update User</h1>
+          <UserUpdateForm
+            handleSubmit={ updateUser }
+            user={ user }
+            handelEditCard={ handelEditCard }
+          />
+        </div>
+      ) }
+    </Mutation>
+  );
+};
 
 
 //from UserUpdateForm.js//
@@ -426,8 +424,9 @@ class UserUpdateForm extends React.Component {
     this.handelChange = this.handelChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handelChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [ e.target.name ]: e.target.value });
   };
 
   handleSubmit(e) {
@@ -446,9 +445,9 @@ class UserUpdateForm extends React.Component {
             <input
               className="input"
               type="text"
-              value={name}
+              value={ name }
               name="name"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -458,9 +457,9 @@ class UserUpdateForm extends React.Component {
             <input
               className="input"
               type="text"
-              value={userName}
+              value={ userName }
               name="userName"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -470,9 +469,9 @@ class UserUpdateForm extends React.Component {
             <input
               className="input"
               type="text"
-              value={department}
+              value={ department }
               name="department"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
@@ -482,16 +481,16 @@ class UserUpdateForm extends React.Component {
             <input
               className="input"
               type="text"
-              value={access}
+              value={ access }
               name="access"
-              onChange={this.handelChange}
+              onChange={ this.handelChange }
             />
           </div>
         </div>
         <button
           className="button is-primary"
           type="submit"
-          onClick={this.handleSubmit}
+          onClick={ this.handleSubmit }
         >
           Update
         </button>
@@ -510,35 +509,35 @@ const getVisibleUsers = (users, filter) => {
     case 'SHOW_ACTIVE':
       return users.filter(t => !t.completed);
     default:
-      throw new Error(`Unknown filter: ${filter}`);
+      throw new Error(`Unknown filter: ${ filter }`);
   }
 };
 
 const UserList = ({ users, visibilityFilter, handelEditCard }) => (
   <ul>
-    {/* {console.log(users)} */}
-    {getVisibleUsers(users, visibilityFilter).map(user => (
-      <User key={user.id} {...user} handelEditCard={handelEditCard} />
-    ))}
+    {/* {console.log(users)} */ }
+    { getVisibleUsers(users, visibilityFilter).map(user => (
+      <User key={ user.id } { ...user } handelEditCard={ handelEditCard }/>
+    )) }
   </ul>
 );
 
 //from Link.js//
 const Link = ({ active, children, onClick }) => {
   if (active) {
-    return <span>{children}</span>;
+    return <span>{ children }</span>;
   }
 
   return (
     <div className="column">
       <a
         className="button"
-        onClick={e => {
+        onClick={ e => {
           e.preventDefault();
           onClick();
-        }}
+        } }
       >
-        {children}
+        { children }
       </a>
     </div>
   );
@@ -552,15 +551,15 @@ const GET_VISIBILITY_FILTER = gql`
 `;
 
 const FilterLink = ({ filter, children }) => (
-  <Query query={GET_VISIBILITY_FILTER}>
-    {({ client }) => (
+  <Query query={ GET_VISIBILITY_FILTER }>
+    { ({ client }) => (
       <Link
-        onClick={() => client.writeData({ data: { visibilityFilter: filter } })}
+        onClick={ () => client.writeData({ data: { visibilityFilter: filter } }) }
         // active={data.visibilityFilter === filter}
       >
-        {children}
+        { children }
       </Link>
-    )}
+    ) }
   </Query>
 );
 
@@ -588,9 +587,8 @@ const GET_USERS = gql`
 }`;
 
 
-
 //state for userID
-class App extends React.Component{
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -600,63 +598,63 @@ class App extends React.Component{
   }
 
 
-handelEditCard(userId){
-  this.setState({ userId });
-  console.log(this.state);
-};
+  handelEditCard(userId) {
+    this.setState({ userId });
+    console.log(this.state);
+  };
 
-render() {
-  return (
-    <div>
-      <div className="container section">
-        <Query query={GET_USERS}>
-          {({ data: { users, visibilityFilter } }) => (
-            <div className="columns is-centered">
-              <div className=" box column is-half">
-                <Header />
-                <hr />
-                <UserList
-                  users={users}
-                  visibilityFilter={visibilityFilter}
-                  handelEditCard={this.handelEditCard}
-                />
-                <br />
-                <a
-                  className="button"
-                  onClick={() => this.handelEditCard(null)}
-                >
-                  Add User
-                </a>
-                <CSVLink className="button" data={users}>
-                  Download Users Data
-                </CSVLink>
+  render() {
+    return (
+      <div>
+        <div className="container section">
+          <Query query={ GET_USERS }>
+            { ({ data: { users, visibilityFilter } }) => (
+              <div className="columns is-centered">
+                <div className=" box column is-half">
+                  <Header/>
+                  <hr/>
+                  <UserList
+                    users={ users }
+                    visibilityFilter={ visibilityFilter }
+                    handelEditCard={ this.handelEditCard }
+                  />
+                  <br/>
+                  <a
+                    className="button"
+                    onClick={ () => this.handelEditCard(null) }
+                  >
+                    Add User
+                  </a>
+                  <CSVLink className="button" data={ users }>
+                    Download Users Data
+                  </CSVLink>
+                </div>
+                <div className="box column is-half">
+                  <UserForm
+                    userId={ this.state.userId }
+                    users={ users }
+                    handelEditCard={ this.handelEditCard }
+                  />
+                </div>
               </div>
-              <div className="box column is-half">
-                <UserForm
-                  userId={this.state.userId}
-                  users={users}
-                  handelEditCard={this.handelEditCard}
-                />
-              </div>
-            </div>
-          )}
-        </Query>
+            ) }
+          </Query>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }
 
 //original index.js code//
 const client = new ApolloClient({
   cache,
-  link: withClientState({ resolvers, defaults, cache, typeDefs}),
+  link: withClientState({ resolvers, defaults, cache, typeDefs }),
 });
 
 
 render(
-  <ApolloProvider client={client}>
-    <App />
+  <ApolloProvider client={ client }>
+    <App/>
   </ApolloProvider>,
   document.getElementById('root'),
 );
