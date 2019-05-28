@@ -1,6 +1,6 @@
 import React from 'react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
 // import Data from '../data';
 
@@ -57,7 +57,15 @@ render() {
   return (
   <ThemeProvider theme={ThemeDefault}>
     <div>
-     <h1> HOWDY </h1>
+    <Header styles={styles.header} 
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+
+    {/* LEFT DRAWER GOES HERE */}
+
+    <div style={styles.container}>
+              {this.props.children}
+    </div>
+
     </div>
   </ThemeProvider>
   );
