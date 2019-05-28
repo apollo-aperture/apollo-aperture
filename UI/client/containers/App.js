@@ -2,8 +2,8 @@ import React from 'react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
+import LeftDrawer from '../components/LeftDrawer';
 // import Data from '../data';
-
 
 class App extends React.Component{
   constructor(props) {
@@ -61,6 +61,8 @@ render() {
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 
     {/* LEFT DRAWER GOES HERE */}
+    <LeftDrawer navDrawerOpen={navDrawerOpen}
+                username="User Admin"/>
 
     <div style={styles.container}>
               {this.props.children}

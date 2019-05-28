@@ -1,74 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-rom'; 
-import AppBar from '@material-ui/core/AppBar'; 
-import IconButton from '@material-ui/core/IconButton'; 
-// import IconMenu from 'material-ui/IconMenu'; // CHECK IF ICON MENU HAS BEEN DEP
-import Icon from '@material-ui/core/Icon';
-import MenuItem from '@material-ui/core/MenuItem'; 
-import Menu from '@material-ui/core/Menu';
-import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-// import ViewModule from 'material-ui/svg-icons/action/view-module'; // CHECK IF VIEW MODUEL IS DEPRECATED
-import blue from '@material-ui/core/colors/blue';
+import {Link} from 'react-router-dom'; 
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+// import Menu from '@material-ui/core/Menu';
 
-
-class Header extends React.Component {
-  render() {
-    const {styles, handleChangeRequestNavDrawer} = this.props;
-
-    const style = {
-      appBar: {
-        position: 'fixed',
-        top: 0,
-        overflow: 'hidden',
-        maxHeight: 57
-      },
-      menuButton: {
-        marginLeft: 10
-      },
-      iconsRightContainer: {
-        marginLeft: 20
-      }
-    };
-
-    return (
-        <div>
-            <h1> HOWDY PARTNER </h1>
-            <AppBar
-              style={{...styles, ...style.appBar}}
-              iconElementLeft={
-                  <IconButton style={style.menuButton} onClick={handleChangeRequestNavDrawer}>
-                    <Menu color={blue[50]} />
-                  </IconButton>
-              }
-              iconElementRight={
-                <div style={style.iconsRightContainer}>
-                  {/* THIS WAS ICON MENU PREV */}
-                  <Icon color={blue[50]}   
-                            iconButtonElement={
-                              <IconButton><ViewModule color={white}/></IconButton>
-                            }
-                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                  >
-                    <MenuItem key={1} primaryText="Application 1"/>
-                    <MenuItem key={2} primaryText="Application 2"/>
-                    <MenuItem key={3} primaryText="Application 3"/>
-                  </Icon>
-                  <Icon color={blue[50]}
-                            iconButtonElement={
-                              <IconButton><ThreeDRotation color={blue[50]}/></IconButton>
-                            }
-                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                  >
-                    <MenuItem primaryText="Exit" containerElement={<Link to="/"/>}/>
-                  </Icon>
-                </div>
-              }
-            />
-          </div>
-      );
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    color: deepPurple[800],
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  iconsRightContainer: {
+    marginLeft: 20
   }
+}));
+
+const Header = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Apollo Aperture
+          </Typography>
+          <MoreIcon color="inherit" className={classes.menuButton}>
+          </MoreIcon>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
 export default Header;
