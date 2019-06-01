@@ -1,4 +1,6 @@
-const babelParser = require('@babel/parser'),
+const parser = require('@babel/parser'),
+  traverse = require('@babel/traverse').default,
+  t = require('@babel/types'),
   fs = require('fs'),
   path = require('path');
 
@@ -93,32 +95,52 @@ const htmlElementsToIgnore = {
 const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
 const file = fs.readFileSync(filePath, 'utf8');
 
-const ast = babelParser.parse(file, {
+const ast = parser.parse(file, {
   sourceType: 'module',
   plugins: [ 'jsx' ]
 });
 
-function hasRenderStatement(node) {
-  // ast.program.body["3"].superClass
-  if (node.type === 'ClassDeclaration' && 'superClass' in node) {
-    node.body.body.forEach(el => {
-      if (el.key.name === 'render') {
-        el.body.body.forEach(innerEl => {
-          if (innerEl.type === 'ReturnStatement' && innerEl.argument.type === 'JSXElement' && innerEl.argument.children.length > 0) {
-            innerEl.argument.children.forEach(child => {
-              if ('openingElement' in child && 'type' in child && child.type === 'JSXElement' && !htmlElementsToIgnore[child.openingElement.name.name]) {
-                // reaches React Component
-                console.log(child);
-              }
-            });
-          }
-        });
-      }
-    });
-  }
-  return false;
+const cache = [];
+
+
+function traverseAst(ast) {
+  const visitorUtility = {
+    ClassDeclaration(path) {
+      path.traverse({
+        ClassBody(path) {
+          path.traverse({
+            ClassMethod(path) {
+              path.traverse({
+                BlockStatement(path) {
+                  path.traverse({
+                    ReturnStatement(path) {
+                      path.traverse({
+                        JSXIdentifier(path) {
+                          cache.push(path);
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  };
+
+  traverse(ast, {
+    enter(path) {
+      path.traverse(visitorUtility);
+    }
+  });
 }
 
-ast.program.body.forEach(node => {
-  hasRenderStatement(node);
+traverseAst(ast);
+
+const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(el => {
+  if (!htmlElementsToIgnore[ el.node.name ]) {
+    return true;
+  }
 });
