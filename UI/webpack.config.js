@@ -13,6 +13,10 @@ module.exports = {
     // contentBase: './'
   },
   devtool: 'source-map',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
   module: {
     rules: [{
       test: /\.js$/,
@@ -27,8 +31,4 @@ module.exports = {
     {test: /\.css$/, use: ['style-loader', 'css-loader']},
   ]
   },
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
-  }
 };

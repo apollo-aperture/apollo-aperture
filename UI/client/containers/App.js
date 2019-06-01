@@ -3,7 +3,8 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
 import LeftDrawer from '../components/LeftDrawer';
-// import Data from '../data';
+import Data from '../data';
+import DashboardPage from './DashboardPage';
 
 class App extends React.Component{
   constructor(props) {
@@ -62,7 +63,9 @@ render() {
 
     {/* LEFT DRAWER GOES HERE */}
     <LeftDrawer navDrawerOpen={navDrawerOpen}
+                menus={Data.menus}
                 username="User Admin"/>
+    <DashboardPage />
 
     <div style={styles.container}>
               {this.props.children}
