@@ -4,9 +4,7 @@ import blue from '@material-ui/core/colors/blue'; // white
 import grey from '@material-ui/core/colors/grey';
 import Typography from '@material-ui/core/Typography';
 
-
 function InfoBox(props) {
-  
     const styles = {
       content: {
         padding: '5px 10px',
@@ -35,7 +33,6 @@ function InfoBox(props) {
         width: 48,
         marginTop: 20,
         maxWidth: '100%'
-
       }
     };
 
@@ -43,7 +40,6 @@ function InfoBox(props) {
       <Paper>
         <span style={styles.iconSpan}> </span>
     
-
         <div style={styles.content}>
           <span style={styles.text}>{props.title}</span>
           <span style={styles.number}>{props.value}</span>
@@ -52,8 +48,6 @@ function InfoBox(props) {
       );
 
 }
-
-
 
 // class InfoBox extends React.Component {
 //     render() {

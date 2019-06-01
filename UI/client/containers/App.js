@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
 import LeftDrawer from '../components/LeftDrawer';
 import Data from '../data';
-import DashboardPage from './DashboardPage';
 
 class App extends React.Component{
   constructor(props) {
@@ -65,7 +64,7 @@ render() {
     <LeftDrawer navDrawerOpen={navDrawerOpen}
                 menus={Data.menus}
                 username="User Admin"/>
-    <DashboardPage />
+    {/* <DashboardPage /> */}
 
     <div style={styles.container}>
               {this.props.children}

@@ -22,6 +22,8 @@ import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 // import InfoBox from './dashboard/InfoBox';
+import DashboardPage from '../containers/DashboardPage';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const drawerWidth = 250;
 
@@ -34,31 +36,50 @@ const drawerWidth = 250;
       fontWeight: Typography.fontWeightLight,
       backgroundColor: 'purple',
       paddingLeft: 40,
-      height: 57,
+      height: 20,
     },
     menuItem: {
       color: 'black',
       fontSize: 14,
       textAlign: 'center',
-      padding: '8px',
+      padding: '10px',
+    },
+    headerText: {
+      textAlign: 'center',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      height: 50,
+      width: 55,
+      float: 'left',
+      color: 'white',
+  
+    },
+    headerTop: {
+      backgroundColor: deepPurple[800],
     },
     avatar: {
       div: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '90%',
         padding: '15px 0 20px 0px',
-        height: 25,
-
+        height: 2,
+        backgroundColor: deepPurple[800],
       },
       icon: {    
         display: 'block',
         marginRight: 'auto',
         marginLeft: 'auto',
-        height: 65,
-        width: 70,
-        boxShadow: '0px 0px 0px 8px rgba(0,0,0,0.2)'
+        height: 50,
+        width: 55,
+        boxShadow: '0px 0px 0px 8px rgba(0,0,0,0.10)',
+        float: 'left',
       },
       span: {
         paddingTop: 36,
-        display: 'block',
+        display: 'inlineBlock',
+        textAlign: 'right',
         color: 'red',
         fontWeight: 300,
         textShadow: '1px 1px #444'
@@ -110,11 +131,14 @@ const useStyles = makeStyles(theme => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+    padding: '0 2px',
+    height: '2px',
+    // minHeight: '12px',
+    // ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
+
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -167,7 +191,7 @@ function LeftDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h5" noWrap>
             Apollo Aperture
           </Typography>
         </Toolbar>
@@ -175,17 +199,18 @@ function LeftDrawer(props) {
       <Drawer
         className={classes.drawer}
         variant="persistent"
-        docked={true}
         anchor="left"
         open={open}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
+        <div className="header-space" style={styles.headerTop}>        
         <div style={styles.avatar.div}>
-          <Avatar src="https://i.imgur.com/ghpRvan.png"
-                  size={70}
-                  style={styles.avatar.icon}/>
+        <span style={styles.headerText}> Mission Control </span>
+          {/* <Avatar src="https://i.imgur.com/ghpRvan.png"
+                  size={40}
+                  style={styles.avatar.icon}/> */}
         </div>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
@@ -193,30 +218,16 @@ function LeftDrawer(props) {
           </IconButton>
         </div>
         <Divider />
+        </div>
         
-        <div>
+        <div style={styles.menuItem}>
           {props.menus.map((menu, index) =>
               <ListItem button key={index} containerelement={<Link to={menu.link}/>}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ThreeDRotation />}</ListItemIcon>
               <ListItemText primary={menu.text}  containerelement={<Link to={menu.link} />} />
               </ListItem>  
-            )};
+            )}
         </div>
-        
-        {/* <List style={styles.menuItem}>
-          {props.menus.map((menu, index) => 
-            <ListItem button key={menu} containerElement={<Link to={menu.link}/>}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ThreeDRotation />}</ListItemIcon>
-            <ListItemText primary={menu.text} />
-            </ListItem>  
-          )} */}
-          {/* {['Welcome', 'Dashboard', 'Schemas', 'Re-rendered Components'].map((text, index) => (
-            <ListItem button key={text} containerElement={<Link to={text.link}/>}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ThreeDRotation />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
-        {/* </List> */}
         <Divider />
         <List style={styles.menuItem}>
           {['Rocket'].map((text, index) => (
@@ -227,31 +238,10 @@ function LeftDrawer(props) {
           ))}
         </List>
       </Drawer>
-      {/* <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          {/* INSERT INFOBOX COMPONENTS HERE */}
-  
- 
-
-        
-        {/* </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </main> */}
+      {/* Dashboard Component Below  */}
+      <main className={clsx(classes.content, {[classes.contentShift]: open,})}>
+        <DashboardPage />
+      </main>
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import blue from '@material-ui/core/colors/blue';
 import InfoBox from '../components/dashboard/InfoBox';
-// import QuickAccess from '../components/dashboard/QuickAccess';
-// import ExtraSpace from '../components/dashboard/ExtraSpace';
+import QuickAccess from '../components/dashboard/QuickAccess';
+import ExtraSpace from '../components/dashboard/ExtraSpace';
 // import Pies from '../components/dashboard/Pies';
 // import PastQuery from '../components/dashboard/PastQuery';
 import globalStyles from '../styles';
-// import Data from '../data';
+import Data from '../data';
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -16,6 +16,13 @@ class DashboardPage extends React.Component {
   }
 }
 render() {
+  const styles = {
+    databox: {
+      textAlign: 'center',
+      margin: 'auto',
+      width: '95%',
+    },
+  }
   return (
     <div>
       <h3 style={globalStyles.navigation}>Dashboard</h3>
@@ -49,6 +56,22 @@ render() {
                    value=""
           />
         </div>
+
+        <div style={styles.databox}>
+        <div className="row">
+        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
+          <QuickAccess data={Data.dashBoardPage.quickAccess}/>
+        </div>
+
+        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-b-15">
+          <ExtraSpace />
+        </div>
+        </div>
+      </div>
+
+
+
+
       </div>
 
     </div>

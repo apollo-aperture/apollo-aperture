@@ -5,6 +5,7 @@ import purple from '@material-ui/core/colors/purple';
 
 const data = {
   menus: [
+    { text: 'Welcome', link: '/dashboard' },
     { text: 'DashBoard', link: '/dashboard' },
     { text: 'Submit Schema', link: '/form' },
     { text: 'View Re-rendered Components', link: '/table' },
