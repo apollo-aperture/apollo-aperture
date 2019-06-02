@@ -4,7 +4,6 @@ import grey from '@material-ui/core/colors/grey';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
-
 function InfoBox(props) {
     const styles = {
       content: {
@@ -41,7 +40,7 @@ function InfoBox(props) {
     return (
       <Paper>
         <span style={styles.iconSpan}> 
-        <Icon color="white" 
+        <Icon color="inherit" 
               style={styles.icon} 
         >{infoLogo}</Icon>
         </span>

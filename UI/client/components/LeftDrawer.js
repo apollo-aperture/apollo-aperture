@@ -26,9 +26,7 @@ import teal from '@material-ui/core/colors/teal';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 // import Background from '../images/input.png';   NEED APPROPRIATE LOADER TO HANDLE FILE
 
-
 const drawerWidth = 250;
-
  const styles = {
     logo: {
       cursor: 'pointer',
@@ -96,7 +94,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
- 
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,

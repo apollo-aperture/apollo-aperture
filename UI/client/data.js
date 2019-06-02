@@ -2,6 +2,9 @@ import React from 'react';
 import cyan from '@material-ui/core/colors/cyan';
 import blue from '@material-ui/core/colors/blue';
 import purple from '@material-ui/core/colors/purple';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 
 const data = {
   menus: [
@@ -39,9 +42,9 @@ const data = {
       {pv: 4300}
     ],
     Pies: [
-      {name: 'Dashboard Component', value: 800, color: purple[400]},
-      {name: 'Mission Component', value: 300, color: cyan[600]},
-      {name: 'Shuttle Component', value: 300, color: blue[700]}
+      {name: 'Dashboard Component', value: 800, color: purple[400], icon: <ExpandMore/>},
+      {name: 'Mission Component', value: 300, color: cyan[600], icon: <ChevronRight/>},
+      {name: 'Shuttle Component', value: 300, color: blue[700], icon: <ExpandLess/>}
     ]
   }
 };
