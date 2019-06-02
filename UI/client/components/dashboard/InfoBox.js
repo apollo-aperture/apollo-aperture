@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import blue from '@material-ui/core/colors/blue'; // white
 import grey from '@material-ui/core/colors/grey';
 import Typography from '@material-ui/core/Typography';
 

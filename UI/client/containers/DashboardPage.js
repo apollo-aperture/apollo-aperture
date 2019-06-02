@@ -56,22 +56,16 @@ render() {
                    value=""
           />
         </div>
-
         <div style={styles.databox}>
         <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
           <QuickAccess data={Data.dashBoardPage.quickAccess}/>
         </div>
-
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 m-b-15">
           <ExtraSpace />
         </div>
         </div>
       </div>
-
-
-
-
       </div>
 
     </div>

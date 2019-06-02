@@ -36,7 +36,7 @@ render() {
     button: {
       marginLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0,
       backgroundColor: 'blue',
-      color: 'white',
+      color: 'black',
       fontWeight: 'bold',
     },
     footer: {

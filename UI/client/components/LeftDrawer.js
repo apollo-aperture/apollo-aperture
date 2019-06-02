@@ -21,9 +21,11 @@ import MailIcon from '@material-ui/icons/Mail';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
-// import InfoBox from './dashboard/InfoBox';
 import DashboardPage from '../containers/DashboardPage';
-import deepPurple from '@material-ui/core/colors/deepPurple';
+import teal from '@material-ui/core/colors/teal';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+// import Background from '../images/input.png';   NEED APPROPRIATE LOADER TO HANDLE FILE
+
 
 const drawerWidth = 250;
 
@@ -39,23 +41,21 @@ const drawerWidth = 250;
       height: 20,
     },
     menuItem: {
-      color: 'black',
+      color: 'white',
       fontSize: 14,
       textAlign: 'center',
       padding: '10px',
     },
     headerText: {
-      textAlign: 'center',
+      marginTop: -5,
       marginRight: 'auto',
-      marginLeft: 'auto',
-      height: 50,
+      marginLeft: '55',
+      whiteSpace: 'nowrap',
+      height: 45,
       width: 55,
       float: 'left',
       color: 'white',
-  
-    },
-    headerTop: {
-      backgroundColor: deepPurple[800],
+      fontWeight: 'bold',
     },
     avatar: {
       div: {
@@ -65,14 +65,13 @@ const drawerWidth = 250;
         width: '90%',
         padding: '15px 0 20px 0px',
         height: 2,
-        backgroundColor: deepPurple[800],
       },
       icon: {    
         display: 'block',
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        height: 50,
-        width: 55,
+        marginTop: 27,
+        marginLeft: -30,
+        height: 45,
+        width: 50,
         boxShadow: '0px 0px 0px 8px rgba(0,0,0,0.10)',
         float: 'left',
       },
@@ -80,7 +79,6 @@ const drawerWidth = 250;
         paddingTop: 36,
         display: 'inlineBlock',
         textAlign: 'right',
-        color: 'red',
         fontWeight: 300,
         textShadow: '1px 1px #444'
       },
@@ -124,17 +122,19 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth,
     flexShrink: 0,
   },
+  headerSpace: {
+    // backgroundImage: `url(${Background})`  //NEED APPROPRIATE LOADER TO HANDLE FILE
+    backgroundColor: teal[500],
+  },
   drawerPaper: {
-    backgroundColor: 'whitesmoke',
+    backgroundColor: blueGrey[300],
     width: drawerWidth,
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: '0 2px',
-    height: '2px',
-    // minHeight: '12px',
-    // ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
@@ -205,15 +205,15 @@ function LeftDrawer(props) {
           paper: classes.drawerPaper,
         }}
       >
-        <div className="header-space" style={styles.headerTop}>        
+        <div className={classes.headerSpace} style={styles.headerTop}>        
         <div style={styles.avatar.div}>
         <span style={styles.headerText}> Mission Control </span>
-          {/* <Avatar src="https://i.imgur.com/ghpRvan.png"
+          <Avatar src="https://i.imgur.com/ghpRvan.png"
                   size={40}
-                  style={styles.avatar.icon}/> */}
+                  style={styles.avatar.icon}/>
         </div>
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} color="inherit">
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>

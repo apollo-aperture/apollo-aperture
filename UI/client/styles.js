@@ -5,7 +5,7 @@ const styles = {
   navigation: {
     fontSize: 15,
     fontWeight: Typography.fontWeightLight,
-    color: grey[600],
+    color: grey[50],
     paddingBottom: 15,
     display: 'block'
   },
