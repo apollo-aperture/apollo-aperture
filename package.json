@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/team-snape/apollo-aperture/issues"
   },
-  "homepage": "https://github.com/team-snape/apollo-aperture#readme"
+  "homepage": "https://github.com/team-snape/apollo-aperture#readme",
+  "devDependencies": {
+    "@babel/parser": "^7.4.5",
+    "@babel/traverse": "^7.4.5",
+    "@babel/types": "^7.4.4"
+  }
 }
