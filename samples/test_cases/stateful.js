@@ -9,6 +9,7 @@ class Stateful extends Component {
     return (
       <div>
           <h1>Header 1</h1>
+          <Mutation addUser={ADD_USER}/>
           <InnerComponent/>
           <Foo/>
       </div>

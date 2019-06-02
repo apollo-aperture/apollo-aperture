@@ -141,6 +141,8 @@ traverseAst(ast);
 
 const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(el => {
   if (!htmlElementsToIgnore[ el.node.name ]) {
-    return true;
+    if (el.node.name === 'Mutation') {
+      return true;
+    }
   }
 });
