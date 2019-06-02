@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
 import LeftDrawer from '../components/LeftDrawer';
 import Data from '../data';
+
+// const App = props => {
+//   const [open, setOpen] = useState(true);
+//   const [navDrawerOpen, setnavDrawerOpen] = useState(false);
+
+//   //HOOKS HERE
+// }
 
 class App extends React.Component{
   constructor(props) {
@@ -13,7 +20,7 @@ class App extends React.Component{
       navDrawerOpen: false,
     };
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {  // Unsafe to use  -> Now use getDerivedStateFromProps - static method which is invoked after a component is instatistated as well as when it receives new
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
@@ -73,7 +80,7 @@ render() {
     </div>
   </ThemeProvider>
   );
-}
+ }
 }
 
 export default App;

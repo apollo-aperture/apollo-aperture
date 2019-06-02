@@ -7,6 +7,8 @@ import ExtraSpace from '../components/dashboard/ExtraSpace';
 // import PastQuery from '../components/dashboard/PastQuery';
 import globalStyles from '../styles';
 import Data from '../data';
+import Delete from '@material-ui/icons/Delete';
+
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -27,9 +29,11 @@ render() {
     <div>
       <h3 style={globalStyles.navigation}>Dashboard</h3>
       <div className="row">
-
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox color={blue[600]} title="Construct a Query" value="" />
+          <InfoBox 
+                   color={blue[600]} 
+                   title="Construct a Query" 
+                   value=""  />
         </div>
 
 
@@ -56,6 +60,10 @@ render() {
                    value=""
           />
         </div>
+        <br>
+        </br>
+
+
         <div style={styles.databox}>
         <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">

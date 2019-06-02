@@ -4,8 +4,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 import {ResponsiveContainer} from 'recharts';
 import GlobalStyles from '../../styles';
 
-// This is a presentational component where we can put the query results
-const ExtraSpace = (props) => {
+const ExtraSpace = () => {
   const styles = {
     paper: {
       backgroundColor: 'white',
@@ -30,7 +29,6 @@ const ExtraSpace = (props) => {
       paddingBottom: '20px',
     }
   };
-
   return (
     <Paper style={styles.paper}>
       <div style={{...GlobalStyles.title, ...styles.header}}> Query Response </div>
