@@ -3,9 +3,9 @@ import grey from '@material-ui/core/colors/grey';
 
 const styles = {
   navigation: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: Typography.fontWeightLight,
-    color: grey[50],
+    color: grey[400],
     paddingBottom: 15,
     display: 'block'
   },

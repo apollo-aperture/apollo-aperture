@@ -20,7 +20,7 @@ function InfoBox(props) {
       text: {
         fontSize: 20,
         fontWeight: Typography.fontWeightLight,
-        color: grey[800],
+        color: grey[500],
       },
       iconSpan: {
         float: 'left',
@@ -30,21 +30,22 @@ function InfoBox(props) {
         backgroundColor: props.color,
       },
       icon: {
-        height: 48,
-        width: 48,
+        height: 72,
+        width: 72,
         marginTop: 20,
         maxWidth: '100%'
       }
     };
-    const infoLogo = ['star'];
     return (
       <Paper>
-        <span style={styles.iconSpan}> 
-        <Icon color="inherit" 
-              style={styles.icon} 
-        >{infoLogo}</Icon>
-        </span>
+          {/* FIX ICONS , ADD CONDITIONAL RENDERING */}
 
+          <span style={styles.iconSpan}> 
+          <Icon color="inherit" 
+                style={styles.icon}
+        >{['check_box']}</Icon>  
+          {/* <Icon styles={styles.icon}>star</Icon> */}
+         </span>
         <div style={styles.content}>
           <span style={styles.text}>{props.title}</span>
           <span style={styles.number}>{props.value}</span>

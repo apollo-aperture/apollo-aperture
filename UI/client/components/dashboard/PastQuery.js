@@ -1,12 +1,11 @@
 import React from 'react';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import IconMenu from 'material-ui/IconMenu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -21,6 +20,7 @@ const PastQuery = (props) => {
       fontWeight: Typography.fontWeightLight,
       backgroundColor: cyan[600],
       color: grey[100],
+      marginBottom: 20,
     }
   };
   const iconButtonElement = (
@@ -32,9 +32,9 @@ const PastQuery = (props) => {
     </IconButton>
   );
   const rightIconMenu = (
-    <List iconButtonElement={iconButtonElement}>
+    <Menu iconButtonElement={iconButtonElement}>
       <ListItemIcon>star</ListItemIcon>
-    </List>
+    </Menu>
   );
   return (
     <Paper>
@@ -42,12 +42,12 @@ const PastQuery = (props) => {
         <ListSubheader style={styles.subheader}>Past Queries</ListSubheader>
         {props.data.map(item =>
           <div key={item.title}>
-            <ListItem
-              primarytext={"Schema Name"}
-              secondarytext={"Click to Expand"}
+            <ListItemText
+              primary={"Schema Name"}
+              secondary={"Click to Expand"}
               righticonbutton={rightIconMenu}
             />
-            <Divider inset={"true"} />
+            <Divider />
           </div>
         )}
       </List>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { MemoryRouter as Router } from 'react-router';
+import { Link } from 'react-router-dom';
 import DashboardPage from '../containers/DashboardPage';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -18,7 +20,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import People from '@material-ui/icons/People';
 import Rocket from '../images/rocket.svg';  
@@ -154,6 +155,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LeftDrawer(props) {
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -167,6 +169,7 @@ function LeftDrawer(props) {
   }
 
   return (
+    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -216,12 +219,13 @@ function LeftDrawer(props) {
         
         <div style={styles.menuItem}>
           {props.menus.map((menu, index) =>
-              <ListItem button key={index} containerelement={<Link to={menu.link}/>}>
+              <ListItem button key={index} button component={Link} to={menu.link}>
               <ListItemIcon>
               {menu.icon}
               </ListItemIcon>
           
-              <ListItemText primary={menu.text}  containerelement={<Link to={menu.link} />} />
+              <ListItemText primary={menu.text}/>
+              {/* <ListItemText primary={menu.text} containerElement={<Link to={menu.link} />} /> */}
               </ListItem>  
             )}
         </div>
@@ -229,7 +233,7 @@ function LeftDrawer(props) {
         <List style={styles.menuItem}>
           
           {['About Us'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} button component={Link} to="/form">
               <ListItemIcon><People/></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -244,6 +248,7 @@ function LeftDrawer(props) {
         <DashboardPage />
       </main>
     </div>
+    </Router>
   );
 }
 

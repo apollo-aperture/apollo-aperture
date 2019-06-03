@@ -25,9 +25,11 @@ const Pies = (props) => {
     },
     subheader: {
         fontSize: 24,
+        marginBottom: 5,
         fontWeight: Typography.fontWeightLight,
         backgroundColor: cyan[600],
         color: grey[100],
+
     },
   };
   return (

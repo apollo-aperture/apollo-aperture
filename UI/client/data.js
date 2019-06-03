@@ -15,7 +15,7 @@ const data = {
     { text: 'Welcome', icon: <Sentiment/>, link: '/dashboard'},
     { text: 'DashBoard', icon: <GridOn/>, link: '/dashboard' },
     { text: 'Submit Schema', icon: <Web/>, link: '/form' },
-    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/table' },
+    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/form' },
   ],
   tablePage: {
     items: [
@@ -34,7 +34,8 @@ const data = {
       {id: 1, title: 'Samsung TV', text: 'Samsung 32 1080p 60Hz LED Smart HDTV.'},
       {id: 2, title: 'Playstation 4', text: 'PlayStation 3 500 GB System'},
       {id: 3, title: 'Apple iPhone 6', text: 'Apple iPhone 6 Plus 16GB Factory Unlocked GSM 4G '},
-      {id: 4, title: 'Apple MacBook', text: 'Apple MacBook Pro MD101LL/A 13.3-Inch Laptop'}
+      {id: 4, title: 'Apple MacBook', text: 'Apple MacBook Pro MD101LL/A 13.3-Inch Laptop'},
+      {id: 5, title: 'asdfsdffsa', text: 'asdfsdfsdfsdfsdfsadf'}
     ],
     quickAccess: [
       {pv: 2400},
