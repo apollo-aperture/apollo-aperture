@@ -22,52 +22,29 @@ const reachProgram = {
   }
 };
 
-// const visitorUtility = (node) => {
-//   if (arguments.length < 1) {
-//     this.node = null;
-//   }
-//   this.node = node;
-//   return {
-//     program: {
-//       Program(node) {
-//         console.log(path);
-//       }
-//     }
-//   };
-// };
-
 function VisitorUtilityCreator(node) {
   if (arguments.length < 1) {
     this.current = null;
   } else {
     this.current = node;
   }
-  this.findProgram = {
-    Program(path) {
-      // this.current = path;
-      // console.log(path);
-    }
-  };
-  this.setTest = function() {
-    this.current = 'foo';
-  }
+  // this.findProgram = function(){
+  //   const self = this;
+  //   return {
+  //     Program(path) {
+  //       self.current = path;
+  //     }
+  //   }
+  // };
 }
 
-// VisitorUtilityCreator.prototype.test = function(input) {
-//   this.current = input;
-// };
-
-// VisitorUtilityCreator.prototype.findProgram = () => {
-//   function foo() {
-//     return {
-//       Program(path) {
-//         this.current = path;
-//         // updateCurrent(path)
-//         // console.log(path);
-//       }
-//     }
-//   }.bind(this)
-// };
+VisitorUtilityCreator.prototype.findProgram = () => {
+  return {
+    Program(path) {
+      this.current = path;
+    }
+  }
+};
 
 (async function init() {
   const file = await getFilePromisified(filePath);
@@ -76,7 +53,9 @@ function VisitorUtilityCreator(node) {
     plugins: [ 'jsx' ]
   });
   const visitor = new VisitorUtilityCreator();
-  traverse(ast, visitor.findProgram);
-  visitor.setTest('foo');
+  // visitor.findProgram.bind(visitor);
+  visitor.findProgram.bind(this);
+  traverse(ast, visitor.findProgram());
   console.log(visitor.current);
 })();
+
