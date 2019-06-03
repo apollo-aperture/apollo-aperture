@@ -1,4 +1,5 @@
 import React from 'react';
+import DashboardPage from '../containers/DashboardPage';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,15 +17,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
-import DashboardPage from '../containers/DashboardPage';
-import teal from '@material-ui/core/colors/teal';
 import blueGrey from '@material-ui/core/colors/blueGrey';
-// import Background from '../images/input.png';   NEED APPROPRIATE LOADER TO HANDLE FILE
+import People from '@material-ui/icons/People';
+import Rocket from '../images/rocket.svg';  
+
 
 const drawerWidth = 250;
  const styles = {
@@ -53,7 +51,7 @@ const drawerWidth = 250;
       width: 55,
       float: 'left',
       color: 'white',
-      fontWeight: 'bold',
+      fontWeight: 'light',
     },
     avatar: {
       div: {
@@ -120,8 +118,7 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
   },
   headerSpace: {
-    // backgroundImage: `url(${Background})`  //NEED APPROPRIATE LOADER TO HANDLE FILE
-    backgroundColor: teal[500],
+    backgroundImage: 'url(' + require('../images/comety.gif') + ')',
   },
   drawerPaper: {
     backgroundColor: blueGrey[300],
@@ -220,20 +217,27 @@ function LeftDrawer(props) {
         <div style={styles.menuItem}>
           {props.menus.map((menu, index) =>
               <ListItem button key={index} containerelement={<Link to={menu.link}/>}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <ThreeDRotation />}</ListItemIcon>
+              <ListItemIcon>
+              {menu.icon}
+              </ListItemIcon>
+          
               <ListItemText primary={menu.text}  containerelement={<Link to={menu.link} />} />
               </ListItem>  
             )}
         </div>
         <Divider />
         <List style={styles.menuItem}>
-          {['Rocket'].map((text, index) => (
+          
+          {['About Us'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon><People/></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
+        <br>
+        </br>
+        <img src={Rocket} alt="" style={styles.image} />
       </Drawer>
       {/* Dashboard Component Below  */}
       <main className={clsx(classes.content, {[classes.contentShift]: open,})}>

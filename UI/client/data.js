@@ -5,13 +5,17 @@ import purple from '@material-ui/core/colors/purple';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRight from '@material-ui/icons/ChevronRight';
+import GridOn from '@material-ui/icons/GridOn';
+import Refresh from '@material-ui/icons/Refresh';
+import Web from '@material-ui/icons/Web';
+import Sentiment from '@material-ui/icons/SentimentSatisfied';
 
 const data = {
   menus: [
-    { text: 'Welcome', link: '/dashboard' },
-    { text: 'DashBoard', link: '/dashboard' },
-    { text: 'Submit Schema', link: '/form' },
-    { text: 'View Re-rendered Components', link: '/table' },
+    { text: 'Welcome', icon: <Sentiment/>, link: '/dashboard'},
+    { text: 'DashBoard', icon: <GridOn/>, link: '/dashboard' },
+    { text: 'Submit Schema', icon: <Web/>, link: '/form' },
+    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/table' },
   ],
   tablePage: {
     items: [

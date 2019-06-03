@@ -70,8 +70,7 @@ render() {
     {/* LEFT DRAWER GOES HERE */}
     <LeftDrawer navDrawerOpen={navDrawerOpen}
                 menus={Data.menus}
-                username="User Admin"/>
-    {/* <DashboardPage /> */}
+                username="Apollo Admin"/>
 
     <div style={styles.container}>
               {this.props.children}

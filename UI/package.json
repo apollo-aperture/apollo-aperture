@@ -36,6 +36,7 @@
     "cookie-parser": "^1.4.4",
     "css-loader": "^2.1.1",
     "express": "^4.16.4",
+    "file-loader": "^3.0.1",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",
     "graphql": "^14.3.0",
@@ -61,6 +62,7 @@
     "style-loader": "^0.23.1",
     "supertest": "^4.0.2",
     "svg.js": "^2.7.1",
+    "url-loader": "^1.1.2",
     "victory": "^32.2.0",
     "webpack": "^4.30.0"
   },
