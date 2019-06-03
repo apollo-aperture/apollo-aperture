@@ -16,11 +16,20 @@ const getFilePromisified = (filePath) => {
   });
 };
 
-const reachProgram = {
-  Program(path) {
-    console.log(path);
+function ApolloClientRef(node, callback) {
+  // To step into a path of a node, you need to provide the parent, opts, scope, state, and parent path
+  // scope and parent path
+  // parent, opts, scope, state, parentPath
+  if (node.node.init.type === 'NewExpression') {
+    traverse(node.parent, {
+      VariableDeclarator(path) {
+        if (path.node.init.callee.name === 'ApolloClient') {
+          callback(node.parent);
+        }
+      }
+    }, node.scope, node.state);
   }
-};
+}
 
 function VisitorUtilityCreator(node) {
   if (arguments.length < 1) {
@@ -28,21 +37,24 @@ function VisitorUtilityCreator(node) {
   } else {
     this.current = node;
   }
-  // this.findProgram = function(){
-  //   const self = this;
-  //   return {
-  //     Program(path) {
-  //       self.current = path;
-  //     }
-  //   }
-  // };
 }
 
-VisitorUtilityCreator.prototype.findProgram = () => {
+VisitorUtilityCreator.prototype.Program = function () {
+  const self = this;
   return {
     Program(path) {
-      this.current = path;
+      self.current = path;
+    },
+    ClassDeclaration(path) {
+      console.log(path);
     }
+  }
+};
+
+VisitorUtilityCreator.MyProgram = {
+
+  Program(path){
+    // do stuff
   }
 };
 
@@ -53,9 +65,15 @@ VisitorUtilityCreator.prototype.findProgram = () => {
     plugins: [ 'jsx' ]
   });
   const visitor = new VisitorUtilityCreator();
-  // visitor.findProgram.bind(visitor);
-  visitor.findProgram.bind(this);
-  traverse(ast, visitor.findProgram());
-  console.log(visitor.current);
+  traverse(ast, visitor.Program());
+
+  function returnValue(val) {
+    console.log(val);
+  }
+  traverse(ast, {
+    VariableDeclarator(path) {
+      ApolloClientRef(path, returnValue);
+    }
+  });
 })();
 
