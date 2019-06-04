@@ -18,8 +18,17 @@ class App extends React.Component{
     this.state = {
       open: true,
       navDrawerOpen: false,
+      loading: true,
     };
   }
+
+  componentDidMount() {
+    // this simulates an async action, after  component will render the content
+    AsyncCall().then(() => this.setState({ loading: false }));
+  }
+
+  
+
   componentWillReceiveProps(nextProps) {  // Unsafe to use  -> Now use getDerivedStateFromProps - static method which is invoked after a component is instatistated as well as when it receives new
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
@@ -33,6 +42,11 @@ class App extends React.Component{
 };
 
 render() {
+  const { loading } = this.state;
+    if(loading) { 
+      return null; // render null when app is not ready
+    }
+
   let { navDrawerOpen } = this.state;
   const paddingLeftDrawerOpen = 236;
 
@@ -80,6 +94,10 @@ render() {
   </ThemeProvider>
   );
  }
+}
+
+function AsyncCall() {
+  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }
 
 export default App;

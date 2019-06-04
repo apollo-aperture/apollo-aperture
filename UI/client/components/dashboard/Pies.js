@@ -69,7 +69,7 @@ const Pies = (props) => {
                   <ListItem
                     key={item.name}
                     leftavatar={
-                      <Avatar icon={item.icon}
+                      <Avatar srcSet={item.icon}
                               backgroundColor={item.color}/>
                     }>
                     {item.name}

@@ -1,6 +1,28 @@
 <html lang="en">
 
 <head>
+  <style>
+  .loader:empty {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  width: 6em;
+  height: 6em;
+  border: 1.1em groove rgba(0,255,255 ,1 ); 
+  border-left: 1.1em groove lightskyblue;
+  border-radius: 50%;
+  animation: load8 1.1s infinite linear;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=0">
   <title>Apollo Aperture</title>
@@ -8,8 +30,11 @@
 <body>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> 
-  <div id="app"></div>
-
+  <!-- The two scripts below are for ajax loading screens -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+  <div id="app" class="loader"></div>
+ 
   <script>
     var WebFontConfig = {
       google: { families: [ 'Roboto:400,300,500:latin' ] }
@@ -24,6 +49,9 @@
     })();
   </script>
   <script src="build/bundle.js"></script>
+
+
+  
 </body>
 
 </html>

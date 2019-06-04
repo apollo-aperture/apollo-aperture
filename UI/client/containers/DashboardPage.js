@@ -7,8 +7,6 @@ import Pies from '../components/dashboard/Pies';
 import PastQuery from '../components/dashboard/PastQuery';
 import globalStyles from '../styles';
 import Data from '../data';
-import Web from '@material-ui/icons/Web';
-import MailIcon from '@material-ui/icons/Mail';
 
 class DashboardPage extends React.Component {
   constructor(props) {
@@ -31,31 +29,27 @@ render() {
       <h3 style={globalStyles.navigation}>Dashboard</h3>
       <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox className="box1"
-                   icon={Web}
+          <InfoBox       
                    color={blue[500]} 
                    title="Construct a Query" 
                    value=""  />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
           <InfoBox
-                   icon={MailIcon}
                    color={blue[500]}
                    title="Apollo Client Docs"
                    value=""
           />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox
-                   icon={Web}
+          <InfoBox               
                    color={blue[500]}
                    title="Star us on Github"
                    value=""
           />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox 
-                   icon={Web}
+          <InfoBox                  
                    color={blue[500]}
                    title="Report Bugs"
                    value=""

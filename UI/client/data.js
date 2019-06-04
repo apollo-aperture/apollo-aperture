@@ -9,6 +9,8 @@ import GridOn from '@material-ui/icons/GridOn';
 import Refresh from '@material-ui/icons/Refresh';
 import Web from '@material-ui/icons/Web';
 import Sentiment from '@material-ui/icons/SentimentSatisfied';
+// import Icon from '@material-ui/core/Icon';
+
 
 const data = {
   menus: [
@@ -47,9 +49,9 @@ const data = {
       {pv: 4300}
     ],
     Pies: [
-      {name: 'Dashboard Component', value: 800, color: purple[400], icon: <ExpandMore/>},
-      {name: 'Mission Component', value: 300, color: cyan[600], icon: <ChevronRight/>},
-      {name: 'Shuttle Component', value: 300, color: blue[700], icon: <ExpandLess/>}
+      {name: 'Component One', value: 800, color: purple[400], icon: 'star'},
+      {name: 'Component Two', value: 300, color: cyan[600], icon: <ChevronRight/>},
+      {name: 'Component Three', value: 300, color: blue[700], icon: <ExpandLess/>}
     ]
   }
 };
