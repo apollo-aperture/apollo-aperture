@@ -60,6 +60,7 @@
     "socket.io": "^2.2.0",
     "socketio": "^1.0.0",
     "style-loader": "^0.23.1",
+    "styled-components": "^4.2.1",
     "supertest": "^4.0.2",
     "svg.js": "^2.7.1",
     "url-loader": "^1.1.2",

@@ -1,6 +1,4 @@
 import React from 'react';
-import { MemoryRouter as Router } from 'react-router';
-import { Link } from 'react-router-dom';
 import DashboardPage from '../containers/DashboardPage';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -23,7 +21,9 @@ import Avatar from '@material-ui/core/Avatar';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import People from '@material-ui/icons/People';
 import Rocket from '../images/rocket.svg';  
-
+import { Route, Switch, Link } from 'react-router-dom';
+import FormPage from '../containers/FormPage';
+import TablePage from '../containers/TablePage';
 
 const drawerWidth = 250;
  const styles = {
@@ -169,7 +169,6 @@ function LeftDrawer(props) {
   }
 
   return (
-    <Router>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -219,23 +218,31 @@ function LeftDrawer(props) {
         
         <div style={styles.menuItem}>
           {props.menus.map((menu, index) =>
-              <ListItem button key={index} button component={Link} to={menu.link}>
+  
+            
+              <ListItem button key={index}>
               <ListItemIcon>
               {menu.icon}
               </ListItemIcon>
-          
+
+              {/* // ADD ROUTER LINK! */}
+              <Link to={menu.link} style={{textDecoration: 'none', color: 'white'}}>
               <ListItemText primary={menu.text}/>
-              {/* <ListItemText primary={menu.text} containerElement={<Link to={menu.link} />} /> */}
+              </Link>
               </ListItem>  
+          
+        
             )}
         </div>
         <Divider />
         <List style={styles.menuItem}>
           
           {['About Us'].map((text, index) => (
-            <ListItem button key={text} button component={Link} to="/form">
+ 
+            <ListItem button key={text} >
               <ListItemIcon><People/></ListItemIcon>
-              <ListItemText primary={text} />
+              <a href={"https://github.com/team-snape/apollo-aperture"} target="_blank" style={{textDecoration: 'none', color: 'white'}}> 
+              <ListItemText primary={text} /></a>
             </ListItem>
           ))}
         </List>
@@ -244,11 +251,20 @@ function LeftDrawer(props) {
         <img src={Rocket} alt="" style={styles.image} />
       </Drawer>
       {/* Dashboard Component Below  */}
+
+
       <main className={clsx(classes.content, {[classes.contentShift]: open,})}>
+
+      <Switch>
+        <Route exact path="/form" component={FormPage}/>
+        <Route exact path="/table" component={TablePage}/> 
         <DashboardPage />
+      </Switch>
+        <br>
+        </br>
+        <Divider/>
       </main>
     </div>
-    </Router>
   );
 }
 

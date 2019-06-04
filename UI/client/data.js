@@ -17,7 +17,7 @@ const data = {
     { text: 'Welcome', icon: <Sentiment/>, link: '/dashboard'},
     { text: 'DashBoard', icon: <GridOn/>, link: '/dashboard' },
     { text: 'Submit Schema', icon: <Web/>, link: '/form' },
-    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/form' },
+    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/table' },
   ],
   tablePage: {
     items: [

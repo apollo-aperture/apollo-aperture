@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import { Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloClient } from 'apollo-client';
 import { withClientState } from 'apollo-link-state';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { resolvers, defaults } from './resolvers';
-// import routes from './routes';
+import routes from './routes';
 import './App.css';
 import App from './containers/App';
 // import 'font-awesome/css/font-awesome.css';
@@ -59,7 +59,9 @@ export const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
+    <Router routes={routes}>
     <App />
+    </Router>
   </ApolloProvider>,
   document.getElementById('app'),
 );
