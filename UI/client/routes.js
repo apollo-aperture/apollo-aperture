@@ -1,18 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import App from './containers/App';
 import FormPage from './containers/FormPage';
-// import TablePage from './containers/TablePage';
+import TablePage from './containers/TablePage';
 import DashboardPage from './containers/DashboardPage';
 
 // All Routes Listed Below
 export default (
-  <Route>
-    <Route path="/" component={App}>
+  <Switch>
+    <Route exact path="/" component={App}>
       <Route exact path="/" component={DashboardPage}/>
-      <Route path="/dashboard" component={DashboardPage}/>
-      <Route path="/form" component={FormPage}/>
-      <Route path="/table" component={FormPage}/> 
+      <Route exact path="/dashboard" component={DashboardPage}/>
+      <Route exact path="/form" component={FormPage}/>
+      <Route exact path="/table" component={TablePage}/> 
     </Route>
-  </Route>
+  </Switch>
 );

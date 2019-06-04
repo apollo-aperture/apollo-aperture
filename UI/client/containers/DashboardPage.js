@@ -24,7 +24,6 @@ render() {
     },
   }
   return (
-
     <div>
       <h3 style={globalStyles.navigation}>Dashboard</h3>
       <div className="row">
@@ -66,12 +65,10 @@ render() {
           <ExtraSpace />
           </div>
         </div>
-
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
           <PastQuery data={Data.dashBoardPage.pastQuery}/>
           </div>
-
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
           <Pies data={Data.dashBoardPage.Pies}/>
           </div>
