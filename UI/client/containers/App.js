@@ -1,9 +1,9 @@
 import React from 'react';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
-// import Data from '../data';
-
+import LeftDrawer from '../components/LeftDrawer';
+import Data from '../data';
 
 class App extends React.Component{
   constructor(props) {
@@ -11,9 +11,16 @@ class App extends React.Component{
     this.state = {
       open: true,
       navDrawerOpen: false,
+      loading: true,
     };
   }
-  componentWillReceiveProps(nextProps) {
+  // For App Loading...
+  componentDidMount() {
+    // this simulates an async action, after  component will render the content
+    AsyncCall().then(() => this.setState({ loading: false }));
+  }
+
+  componentWillReceiveProps(nextProps) {  // Refactor to getDerivedStateFromProps...
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
@@ -26,6 +33,10 @@ class App extends React.Component{
 };
 
 render() {
+  const { loading } = this.state;
+    if(loading) { 
+      return null; // render null when app is not ready
+    }
   let { navDrawerOpen } = this.state;
   const paddingLeftDrawerOpen = 236;
 
@@ -36,7 +47,7 @@ render() {
     button: {
       marginLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0,
       backgroundColor: 'blue',
-      color: 'white',
+      color: 'black',
       fontWeight: 'bold',
     },
     footer: {
@@ -57,11 +68,21 @@ render() {
   return (
   <ThemeProvider theme={ThemeDefault}>
     <div>
-     <h1> HOWDY </h1>
+    <Header styles={styles.header} 
+            handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+    <LeftDrawer navDrawerOpen={navDrawerOpen} menus={Data.menus} username="Apollo Admin"/>
+      <div style={styles.container}>
+      {this.props.children}
+      </div>
     </div>
   </ThemeProvider>
   );
+ }
 }
+
+// Async call for app loading... 
+function AsyncCall() {
+  return new Promise((resolve) => setTimeout(() => resolve(), 1500));
 }
 
 export default App;
