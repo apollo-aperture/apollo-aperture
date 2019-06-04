@@ -41,6 +41,7 @@ class App extends Component {
         <TitleDiv />
         <div>
           <h3>Selected Post: {this.state.selectedPost}</h3>
+          <TitleDiv />
         </div>
         <PostsContainer
           posts={this.state.posts}
