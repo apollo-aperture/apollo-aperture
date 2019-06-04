@@ -1,17 +1,23 @@
 import React from 'react';
-import Assessment from 'material-ui/svg-icons/action/assessment';
-import GridOn from 'material-ui/svg-icons/image/grid-on';
-import Web from 'material-ui/svg-icons/av/web';
-import {cyan600, blue700, purple400} from 'material-ui/styles/colors';
-import ExpandLess from 'material-ui/svg-icons/navigation/expand-less';
-import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import cyan from '@material-ui/core/colors/cyan';
+import blue from '@material-ui/core/colors/blue';
+import purple from '@material-ui/core/colors/purple';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import GridOn from '@material-ui/icons/GridOn';
+import Refresh from '@material-ui/icons/Refresh';
+import Web from '@material-ui/icons/Web';
+import Sentiment from '@material-ui/icons/SentimentSatisfied';
+// import Icon from '@material-ui/core/Icon';
+
 
 const data = {
   menus: [
-    { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
+    { text: 'Welcome', icon: <Sentiment/>, link: '/dashboard'},
+    { text: 'DashBoard', icon: <GridOn/>, link: '/dashboard' },
     { text: 'Submit Schema', icon: <Web/>, link: '/form' },
-    { text: 'View Re-rendered Components', icon: <GridOn/>, link: '/table' },
+    { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/table' },
   ],
   tablePage: {
     items: [
@@ -30,7 +36,8 @@ const data = {
       {id: 1, title: 'Samsung TV', text: 'Samsung 32 1080p 60Hz LED Smart HDTV.'},
       {id: 2, title: 'Playstation 4', text: 'PlayStation 3 500 GB System'},
       {id: 3, title: 'Apple iPhone 6', text: 'Apple iPhone 6 Plus 16GB Factory Unlocked GSM 4G '},
-      {id: 4, title: 'Apple MacBook', text: 'Apple MacBook Pro MD101LL/A 13.3-Inch Laptop'}
+      {id: 4, title: 'Apple MacBook', text: 'Apple MacBook Pro MD101LL/A 13.3-Inch Laptop'},
+      {id: 5, title: 'asdfsdffsa', text: 'asdfsdfsdfsdfsdfsadf'}
     ],
     quickAccess: [
       {pv: 2400},
@@ -42,9 +49,9 @@ const data = {
       {pv: 4300}
     ],
     Pies: [
-      {name: 'Dashboard Component', value: 800, color: purple400, icon: <ExpandMore/>},
-      {name: 'Mission Component', value: 300, color: cyan600, icon: <ChevronRight/>},
-      {name: 'Shuttle Component', value: 300, color: blue700, icon: <ExpandLess/>}
+      {name: 'Component One', value: 800, color: purple[400], icon: 'star'},
+      {name: 'Component Two', value: 300, color: cyan[600], icon: <ChevronRight/>},
+      {name: 'Component Three', value: 300, color: blue[700], icon: <ExpandLess/>}
     ]
   }
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloClient } from 'apollo-client';
 import { withClientState } from 'apollo-link-state';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -8,7 +8,7 @@ import { ApolloProvider } from 'react-apollo';
 import { resolvers, defaults } from './resolvers';
 import routes from './routes';
 import './App.css';
-// import App from './containers/App';
+import App from './containers/App';
 // import 'font-awesome/css/font-awesome.css';
 import 'flexboxgrid/css/flexboxgrid.css';
 
@@ -58,10 +58,12 @@ export const client = new ApolloClient({
 });
 
 render(
-  <ApolloProvider client={client}><Router routes={routes} history={BrowserRouter} />
-    {/* <App /> */}
+  <ApolloProvider client={client}>
+    <Router routes={routes}>
+    <App />
+    </Router>
   </ApolloProvider>,
-  document.getElementById('root'),
+  document.getElementById('app'),
 );
 
 export default client;
