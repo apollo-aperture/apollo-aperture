@@ -64,8 +64,8 @@ VisitorUtilityCreator.MyProgram = {
     sourceType: 'module',
     plugins: [ 'jsx' ]
   });
-  const visitor = new VisitorUtilityCreator();
-  traverse(ast, visitor.Program());
+  // const visitor = new VisitorUtilityCreator();
+  // traverse(ast, visitor.Program());
 
   function returnValue(val) {
     console.log(val);
