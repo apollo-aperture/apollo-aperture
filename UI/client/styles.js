@@ -12,13 +12,20 @@ const styles = {
   title: {
     fontSize: 24,
     fontWeight: Typography.fontWeightLight,
-    marginBottom: 20
+    marginBottom: 20,
+    fontWeight: 'lighter',
   },
   paper: {
     padding: 30
   },
   clear: {
     clear: 'both'
+  },
+  button: {
+    display: 'block',
+    backgroundColor: 'red',
+    color: 'white',
+    margin: '0 auto',
   }
 };
 
