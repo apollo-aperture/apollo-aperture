@@ -41,7 +41,7 @@ function InfoBox(props) {
       <Paper>
           {/* FIX ICONS , ADD CONDITIONAL RENDERING */}
 
-          <span style={styles.iconSpan}> 
+          <span style={styles.iconSpan} className="fun-hover"> 
            <Icon color="inherit" 
                 icon={props.Icon}
                 style={styles.icon}

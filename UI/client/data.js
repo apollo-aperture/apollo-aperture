@@ -3,20 +3,18 @@ import cyan from '@material-ui/core/colors/cyan';
 import blue from '@material-ui/core/colors/blue';
 import purple from '@material-ui/core/colors/purple';
 import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import GridOn from '@material-ui/icons/GridOn';
 import Refresh from '@material-ui/icons/Refresh';
-import Web from '@material-ui/icons/Web';
 import Sentiment from '@material-ui/icons/SentimentSatisfied';
-// import Icon from '@material-ui/core/Icon';
+import Chart from '@material-ui/icons/InsertChartOutlined';
 
 
 const data = {
   menus: [
     { text: 'Welcome', icon: <Sentiment/>, link: '/dashboard'},
     { text: 'DashBoard', icon: <GridOn/>, link: '/dashboard' },
-    { text: 'Submit Schema', icon: <Web/>, link: '/form' },
+    { text: 'Visualize Query', icon: <Chart/>, link: '/form' },
     { text: 'View Re-rendered Components', icon:<Refresh/>, link: '/table' },
   ],
   tablePage: {

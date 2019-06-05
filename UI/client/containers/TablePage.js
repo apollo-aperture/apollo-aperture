@@ -85,6 +85,9 @@ const TablePage = () => {
           </TableBody>
         </Table>    
     </PageBase>
+    <br>
+    </br>
+
     </div>
   );
 };

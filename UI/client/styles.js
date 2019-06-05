@@ -20,6 +20,12 @@ const styles = {
   },
   clear: {
     clear: 'both'
+  },
+  button: {
+    display: 'block',
+    backgroundColor: 'red',
+    color: 'white',
+    margin: '0 auto',
   }
 };
 
