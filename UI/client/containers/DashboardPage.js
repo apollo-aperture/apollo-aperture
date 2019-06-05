@@ -8,13 +8,22 @@ import PastQuery from '../components/dashboard/PastQuery';
 import globalStyles from '../styles';
 import Data from '../data';
 
+
 class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     img: ['build','book','star', 'bug_report'],
+    selectedFile: null,
   }
 }
+
+onChangeHandler(event) {
+  // console.log(event.target.files[0])
+
+}
+
+
 render() {
   const styles = {
     databox: {
@@ -73,6 +82,7 @@ render() {
           <Pies data={Data.dashBoardPage.Pies}/>
           </div>
         </div>
+        <input type="file" name="file" onChange={this.onChangeHandler}/>
       </div>
     </div>
   </div>

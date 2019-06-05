@@ -3,15 +3,27 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const upload = require('./upload')
+const cors = require('cors')
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-//routes
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
 
+app.use(cors(corsOptions));
+
+
+app.post('/upload', upload)
+
+//routes
 const productRoute = require('./routes/productRoute.js');
+
 
 app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -30,5 +42,8 @@ app.use('/', (req, res) => {
   res.send('reached root route');
 });
 
+app.listen(8000, () => {
+  console.log('Server listening on Port 8000')
+})
 
 module.exports = app;

@@ -5,6 +5,7 @@ import ThemeDefault from '../theme-default';
 import LeftDrawer from '../components/LeftDrawer';
 import Data from '../data';
 
+
 class App extends React.Component{
   constructor(props) {
     super(props);
@@ -12,7 +13,9 @@ class App extends React.Component{
       open: true,
       navDrawerOpen: false,
       loading: true,
+      selectedFile: null,
     };
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
   // For App Loading...
   componentDidMount() {
@@ -25,11 +28,24 @@ class App extends React.Component{
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
   } 
-
+  onChangeHandler(event) {
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    })
+  };
+  
   handleChangeRequestNavDrawer() {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen
     });
+
+  
+  
+
+
+
+
 };
 
 render() {
@@ -68,8 +84,10 @@ render() {
   return (
   <ThemeProvider theme={ThemeDefault}>
     <div>
+ 
     <Header styles={styles.header} 
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+       <input type="file" name="file" onChange={this.onChangeHandler}/>
     <LeftDrawer navDrawerOpen={navDrawerOpen} menus={Data.menus} username="Apollo Admin"/>
       <div style={styles.container}>
       {this.props.children}
