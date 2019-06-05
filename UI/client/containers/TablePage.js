@@ -6,13 +6,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow'; 
-import pink from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey'
 import PageBase from '../components/PageBase';
 import Data from '../data';
 import AddIcon from '@material-ui/icons/Add';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import EditIcon from '@material-ui/icons/Edit';
+
 
 const TablePage = () => {
   const styles = {
@@ -50,7 +49,7 @@ const TablePage = () => {
     <PageBase title="Data Visualizer"
               navigation="Re-rendered Components">
         <Link to="/form" >
-          <Fab style={styles.fab} color={pink[500]}>
+          <Fab style={styles.fab} color="inherit">
             <AddIcon />
           </Fab>
         </Link>
@@ -74,7 +73,7 @@ const TablePage = () => {
                 <TableCell style={styles.columns.edit}>
                   <Link className="button" to="/form">
                     <Fab      
-                                          color={grey[200]}
+                                          color="inherit"
                                           style={styles.editButton}>
                     <EditIcon/>
                     </Fab>
@@ -84,6 +83,8 @@ const TablePage = () => {
             )}
           </TableBody>
         </Table>    
+
+       
     </PageBase>
     <br>
     </br>
