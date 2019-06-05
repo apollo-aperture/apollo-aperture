@@ -12,7 +12,7 @@ class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    img: [],
+    img: ['build','book','star', 'bug_report'],
   }
 }
 render() {
@@ -28,27 +28,27 @@ render() {
       <h3 style={globalStyles.navigation}>Dashboard</h3>
       <div className="row">
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox       
+          <InfoBox Icon={this.state.img[0]}       
                    color={blue[500]} 
                    title="Construct a Query" 
                    value=""  />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox
+          <InfoBox Icon={this.state.img[1]}
                    color={blue[500]}
                    title="Apollo Client Docs"
                    value=""
           />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox               
+          <InfoBox Icon={this.state.img[2]}               
                    color={blue[500]}
                    title="Star us on Github"
                    value=""
           />
         </div>
         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox                  
+          <InfoBox Icon={this.state.img[3]}                  
                    color={blue[500]}
                    title="Report Bugs"
                    value=""

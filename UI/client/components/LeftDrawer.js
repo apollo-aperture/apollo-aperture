@@ -133,7 +133,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
   },
   content: {
-
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -155,7 +154,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LeftDrawer(props) {
-
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -218,8 +216,6 @@ function LeftDrawer(props) {
         
         <div style={styles.menuItem}>
           {props.menus.map((menu, index) =>
-  
-            
               <ListItem button key={index}>
               <ListItemIcon>
               {menu.icon}
@@ -230,15 +226,13 @@ function LeftDrawer(props) {
               <ListItemText primary={menu.text}/>
               </Link>
               </ListItem>  
-          
-        
             )}
         </div>
         <Divider />
         <List style={styles.menuItem}>
           
+          {/* LINKS TO OUR GITHUB */}
           {['About Us'].map((text, index) => (
- 
             <ListItem button key={text} >
               <ListItemIcon><People/></ListItemIcon>
               <a href={"https://github.com/team-snape/apollo-aperture"} target="_blank" style={{textDecoration: 'none', color: 'white'}}> 
@@ -251,10 +245,9 @@ function LeftDrawer(props) {
         <img src={Rocket} alt="" style={styles.image} />
       </Drawer>
       {/* Dashboard Component Below  */}
-
-
       <main className={clsx(classes.content, {[classes.contentShift]: open,})}>
 
+      {/* SWITCHES FOR RENDERING FORM / TABLE COMPONENTS WHEN CLICKING IN LEFT DRAWER MENU */}
       <Switch>
         <Route exact path="/form" component={FormPage}/>
         <Route exact path="/table" component={TablePage}/> 

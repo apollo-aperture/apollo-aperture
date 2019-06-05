@@ -24,6 +24,7 @@ const Cloud = styled.div`
   animation: ${props => pulse(props.theme.shadow)} 1.75s infinite cubic-bezier(0.646, 0, 0, 1);
 `;
 
+
 const ExtraSpace = () => {
   const styles = {
     paper: {
@@ -34,12 +35,12 @@ const ExtraSpace = () => {
       marginLeft: 'auto',
       marginRight: 'auto',
       width: '95%',
-      height: 85
+      height: 85,
     },
     header: {
       color: 'white',
       backgroundColor: blueGrey[600],
-      padding: 10
+      padding: 10,
     },
     image: {
       borderRadius: '15px',
@@ -51,16 +52,20 @@ const ExtraSpace = () => {
       backgroundColor: blue[500],
       color: 'white',
       shadow: 'rgba(0, 0, 0, 0.7)',
+    },
+    input: {
+      opacity: 0.01,
+      marginTop: -25,
     }
   };
   return (
     <Paper style={styles.paper}>
       <div style={{...GlobalStyles.title, ...styles.header}}> Query Response </div>
       <div style={styles.div}>
-  
         <ResponsiveContainer>
           <Button variant="contained" color="default" style={styles.image}>
             <Cloud><CloudUploadIcon /></Cloud>
+            <input className="dropzone" type="file" name="file" style={styles.input} />  
           </Button>
         </ResponsiveContainer>
       </div>

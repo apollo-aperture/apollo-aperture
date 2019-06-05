@@ -5,147 +5,67 @@ import TextField from '@material-ui/core/TextField';
 import grey from '@material-ui/core/colors/grey';
 import Divider from '@material-ui/core/Divider';
 import PageBase from '../components/PageBase';
+import QueryTree from '../d3.js';
 
-// function FormPage(props) {
-//     const styles = {
-//         toggleDiv: {
-//         maxWidth: 300,
-//         marginTop: 40,
-//         marginBottom: 5
-//         },
-//         toggleLabel: {
-//         color: grey[400],
-//         fontWeight: 100
-//         },
-//         buttons: {
-//         marginTop: 30,
-//         float: 'right'
-//         },
-//         saveButton: {
-//         marginLeft: 5
-//         }
-//     };
-
-//     return (
-
-//         <PageBase title="Query / Mutation Form"
-//                 navigation="Post Schema">
-//         <form>
-//             <TextField
-//             hintText="Astronaut Name"
-//             floatingLabelText="Astronaut Name"
-//             fullWidth={true}
-//             />
-//             <TextField
-//             hintText="Nationality"
-//             floatingLabelText="Nationality"
-//             fullWidth={true}
-//             />
-//             <TextField
-//             hintText="Rank"
-//             floatingLabelText="Rank"
-//             fullWidth={true}
-//             />
-//             <TextField
-//             hintText="Mission"
-//             floatingLabelText="Mission"
-//             fullWidth={true}
-//             />
-//             <TextField
-//             hintText="Status"
-//             floatingLabelText="Status"
-//             fullWidth={true}
-//             />
-//             <Divider/>
-//             <div style={styles.buttons}>
-//             <Link to="/">
-//                 <Button label="Cancel"/>
-//             </Link>
-
-//             {/* // Redirects to Dashboard */}
-//             <Link to="/">
-//             <Button label="LAUNCH"
-//                             style={styles.saveButton}
-//                             type="submit"
-//                             primary={true} />
-//             </Link>
-//             </div>
-//         </form>
-//         </PageBase>  
-//     );
-// }
-  
-class FormPage extends React.Component {
-  constructor(props) {
-    super(props);
-  };
-  
-  render() {
+function FormPage(props) {
     const styles = {
-      toggleDiv: {
+        toggleDiv: {
         maxWidth: 300,
         marginTop: 40,
         marginBottom: 5
-      },
-      toggleLabel: {
+        },
+        toggleLabel: {
         color: grey[400],
         fontWeight: 100
-      },
-      buttons: {
+        },
+        buttons: {
         marginTop: 30,
         float: 'right'
-      },
-      saveButton: {
+        },
+        saveButton: {
         marginLeft: 5
-      }
+        }
     };
     return (
-      <PageBase title="Query / Mutation Form"
+        <PageBase title="Query / Mutation Form"
                 navigation="Post Schema">
         <form>
-          <TextField
-            hintText="Astronaut Name"
-            floatingLabelText="Astronaut Name"
+            <TextField
             fullWidth={true}
-          />
-          <TextField
-            hintText="Nationality"
-            floatingLabelText="Nationality"
+            />
+            <TextField
             fullWidth={true}
-          />
-          <TextField
-            hintText="Rank"
-            floatingLabelText="Rank"
+            />
+            <TextField
             fullWidth={true}
-          />
-          <TextField
-            hintText="Mission"
-            floatingLabelText="Mission"
+            />
+            <TextField
             fullWidth={true}
-          />
-          <TextField
-            hintText="Status"
-            floatingLabelText="Status"
+            />
+            <TextField
             fullWidth={true}
-          />
-          <Divider/>
-          <div style={styles.buttons}>
+            />
+            <Divider/>
+            <br>
+            </br>
+
+            <div style={styles.buttons}>
             <Link to="/">
-              <Button label="Cancel"/>
+                <Button label="Cancel"/>
             </Link>
-  
+
             {/* // Redirects to Dashboard */}
             <Link to="/">
             <Button label="LAUNCH"
-                          style={styles.saveButton}
-                          type="submit"
-                          primary={true} />
+                            style={styles.saveButton}
+                            type="submit"
+                            primary={"true"} />
             </Link>
-          </div>
-        </form>
-      </PageBase>  
-    );
-  }
-}
 
+            
+            </div>
+        </form>
+        </PageBase>  
+    );
+}
 export default FormPage;

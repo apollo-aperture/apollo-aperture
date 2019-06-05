@@ -12,7 +12,8 @@ const styles = {
   title: {
     fontSize: 24,
     fontWeight: Typography.fontWeightLight,
-    marginBottom: 20
+    marginBottom: 20,
+    fontWeight: 'lighter',
   },
   paper: {
     padding: 30

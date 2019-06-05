@@ -79,7 +79,6 @@ render() {
   );
  }
 }
-
 // Async call for app loading... 
 function AsyncCall() {
   return new Promise((resolve) => setTimeout(() => resolve(), 1500));
