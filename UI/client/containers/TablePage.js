@@ -12,7 +12,6 @@ import Data from '../data';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 
-
 const TablePage = () => {
   const styles = {
     fab: {
@@ -83,12 +82,9 @@ const TablePage = () => {
             )}
           </TableBody>
         </Table>    
-
-       
     </PageBase>
     <br>
     </br>
-
     </div>
   );
 };

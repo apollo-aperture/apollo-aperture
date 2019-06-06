@@ -3,23 +3,46 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const upload = require('./upload')
 const cors = require('cors')
+const multer = require('multer') // File handler
 
 const www = express();
 www.use(bodyParser.urlencoded({extended: true}));
 www.use(bodyParser.json());
 www.use(cookieParser());
 
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200,
+// };
 
-www.use(cors(corsOptions));
+www.use(cors());
 
+let storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+  cb(null, 'public')
+},
+filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' +file.originalname )
+}
+})
 
-www.post('/upload', upload)
+let upload = multer({ storage: storage }).single('file');
+
+www.post('/upload',function(req, res) {
+     
+  upload(req, res, function (err) {
+         if (err instanceof multer.MulterError) {
+             return res.status(500).json(err)
+         } else if (err) {
+             return res.status(500).json(err)
+         }
+    return res.status(200).send(req.file)
+
+  })
+
+});
+
 
 //routes
 const productRoute = require('../routes/productRoute.js');
@@ -42,8 +65,8 @@ www.use('/', (req, res) => {
   res.send('reached root route');
 });
 
-www.listen(3000, () => {
-  console.log('Server listening on Port 3000')
+www.listen(8000, () => {
+  console.log('Server listening on Port 8000')
 })
 
 module.exports = www;
