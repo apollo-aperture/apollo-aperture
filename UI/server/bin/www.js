@@ -1,4 +1,3 @@
-// 2nd connecting up express to PG
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,19 +10,19 @@ www.use(bodyParser.urlencoded({extended: true}));
 www.use(bodyParser.json());
 www.use(cookieParser());
 
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200,
-// };
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
 
-www.use(cors());
+www.use(cors(corsOptions));
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
   cb(null, 'public')
 },
 filename: function (req, file, cb) {
-  cb(null, Date.now() + '-' +file.originalname )
+  cb(null, file.originalname)
 }
 })
 
@@ -38,15 +37,11 @@ www.post('/upload',function(req, res) {
              return res.status(500).json(err)
          }
     return res.status(200).send(req.file)
-
   })
-
 });
-
 
 //routes
 const productRoute = require('../routes/productRoute.js');
-
 
 www.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -55,7 +50,6 @@ www.get('/', (req, res)=>{
 www.use(bodyParser.urlencoded({extended: true}));
 www.use(bodyParser.json());
 www.use(cookieParser())
-
 
 // www.use('/build', express.static(path.join(__dirname, '../build')));
 www.use('/api', productRoute);

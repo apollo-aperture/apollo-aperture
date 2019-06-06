@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import ThemeDefault from '../theme-default';
 import LeftDrawer from '../components/LeftDrawer';
 import Data from '../data';
-import axios from 'axios';
 
 class App extends React.Component{
   constructor(props) {
@@ -13,48 +12,23 @@ class App extends React.Component{
       open: true,
       navDrawerOpen: false,
       loading: true,
-      selectedFile: null,
     };
-    this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.onClickHandler = this.onClickHandler.bind(this);
   }
   // For App Loading...
   componentDidMount() {
     // this simulates an async action, after  component will render the content
     AsyncCall().then(() => this.setState({ loading: false }));
   }
-
   componentWillReceiveProps(nextProps) {  // Refactor to getDerivedStateFromProps...
     if (this.props.width !== nextProps.width) {
       this.setState({navDrawerOpen: nextProps.width === LARGE});
     }
   } 
-
-  // This is for the file uploader
-  onChangeHandler(event) {
-    console.log(event.target.files[0]);
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    })
-  };
-
-  onClickHandler() {
-    const data = new FormData() 
-    data.append('file', this.state.selectedFile)
-      axios.post("http://localhost:8000/upload", data, { // receive two parameter endpoint url ,form data 
-    })
-    .then(res => { // then print response status
-      console.log(res.statusText)
-    })
-  };
-  
   handleChangeRequestNavDrawer() {
     this.setState({
       navDrawerOpen: !this.state.navDrawerOpen
     });
 };
-
 render() {
   const { loading } = this.state;
     if(loading) { 

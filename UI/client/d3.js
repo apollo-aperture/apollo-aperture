@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './App.css'
 const d3 = require('d3');
 
-
 class QueryTree extends Component {
   constructor(props) {
     super(props)
