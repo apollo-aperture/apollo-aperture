@@ -52,6 +52,9 @@ class ExtraSpace extends React.Component{
     .then(res => { // then print response status
       console.log(res.statusText)
     })
+    .catch(error => {
+      console.log(error.response)
+    });
   };
   render() {
     const styles = {
