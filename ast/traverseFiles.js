@@ -3,6 +3,7 @@ const parser = require('@babel/parser'),
   t = require('@babel/types'),
   fs = require('fs'),
   path = require('path'),
+  traverseElements = require('./traverseElements'),
   htmlElementsToIgnore = require('./util/htmlElements');
 
 let apolloClientVar;
@@ -33,7 +34,7 @@ const traverseFiles = {
       if (isIndexFile(ast)) {
 
       } else {
-
+        traverseElements(ast);
       }
       // old version with promise chaining
       // getFilePromisified(filePath)
