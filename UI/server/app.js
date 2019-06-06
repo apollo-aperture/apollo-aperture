@@ -3,27 +3,48 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const upload = require('./upload')
 const cors = require('cors')
-
+const multer = require('multer') // File handler
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+  cb(null, 'public')
+},
+filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' +file.originalname )
+}
+})
 
-app.post('/upload', upload)
+var upload = multer({ storage: storage }).single('file');
+
+app.post('/upload',function(req, res) {
+     
+  upload(req, res, function (err) {
+         if (err instanceof multer.MulterError) {
+             return res.status(500).json(err)
+         } else if (err) {
+             return res.status(500).json(err)
+         }
+    return res.status(200).send(req.file)
+
+  })
+
+});
+
 
 //routes
 const productRoute = require('./routes/productRoute.js');
-
 
 app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, 'index.html'));
