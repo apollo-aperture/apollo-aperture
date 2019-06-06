@@ -1,4 +1,6 @@
-# apollo-aperture
+Apollo Aperture - with REACT, Apollo Client, and GraphQL API applications only
+
+A developer tool to chronologically track React components being rendered when utilizing Apollo Client and/or with  apollo-cache-inmemory for remote data caching and state management.
 
 File structure is as follows:
 
