@@ -8,6 +8,8 @@ const parser = require('@babel/parser'),
 
 let apolloClientVar;
 
+const appData = [];
+
 // const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
 // const filePath = path.join(__dirname, '..', 'samples', 'todo', 'index.js');
 
@@ -34,8 +36,10 @@ const traverseFiles = {
       if (isIndexFile(ast)) {
 
       } else {
-        traverseElements(ast);
+
+        appData.push(traverseElements(ast));
       }
+      console.log(appData);
       // old version with promise chaining
       // getFilePromisified(filePath)
       // // getFilePromisified(file)
@@ -48,19 +52,17 @@ const traverseFiles = {
       //     const index = isIndexFile(ast);
       //     console.log(index);
       //   });
-    }
+    };
   }
 };
 
-function isIndexFile(ast) {
+const isIndexFile = ast => {
   traverse(ast, {
     ImportDeclaration(path) {
-      if (path.node.source.value === 'react-dom') {
-        console.log(path);
-      }
+      return path.node.source.value === 'react-dom';
     }
   });
-}
+};
 
 
 /*const findReactDOMImport = ast => {
