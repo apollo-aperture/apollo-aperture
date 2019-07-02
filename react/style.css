@@ -1,0 +1,60 @@
+body {
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  color: rgb(55, 55, 55);
+}
+
+a:visited, a {
+  color: rgb(55,55,55);
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(29, 29, 29);
+  text-decoration: none;
+}
+
+h1 {
+  margin: 0;
+}
+
+.container-fluid {
+  width: 100%;
+  background-color: rgb(168, 203, 255);
+  height: auto;
+}
+
+.container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.container > h1 {
+  display: inline-block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  /*height: 50px;*/
+  height: auto;
+}
+
+.menu > a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  /*border: 1px solid black;*/
+  padding: 5px;
+}
+
+.menu > a:first-child {
+  border-right: none;
+  /*margin-right: 20px;*/
+}
+
+.inline {
+  display: inline-block;
+  margin: auto;
+}

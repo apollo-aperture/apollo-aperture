@@ -4,7 +4,7 @@ import Header from './header';
 import Hierarchy from './hierarchy';
 
 const App = () => (
-  <div className="container">
+  <div>
     <Router>
       <div>
         <Header/>
