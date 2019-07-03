@@ -50,9 +50,11 @@ h1 {
 .flex-inner > button {
   display: block;
   margin: 20px auto;
-  background-color: #b5e5fb;
+  background-color: #cbf3fb;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .container-fluid {

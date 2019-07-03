@@ -5,7 +5,7 @@ const HierarchySidebar = () => (
   <>
     <div className="flex-inner">
       Open directory to generate component hierarchy
-      <button>Select folder</button>
+      <button type="button">Select folder</button>
     </div>
     <div className="flex-inner">
       <hr />
