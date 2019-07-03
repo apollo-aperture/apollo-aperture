@@ -5,21 +5,18 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const Header = () => {
   return (
-    <div className="container-fluid">
+    <header className="container-fluid blue-bg">
       <div className="container">
         <h1>Apollo Aperture</h1>
-        <div className="menu">
-
-            <Link to="/">Component Hierarchy</Link>
-
-            <Link to="/invoke">Mutations and Queries</Link>
-
-        </div>
+        <nav className="menu">
+          <Link to="/">Component Hierarchy</Link>
+          <Link to="/mutation">Mutations and Queries</Link>
+        </nav>
         <div>
-          <Link to="/"><FontAwesomeIcon icon={ faGithub }/> Star us on Github</Link>
+          <a href="https://github.com/apollo-aperture/apollo-aperture" target="_blank"><FontAwesomeIcon icon={faGithub}/> Star us on Github</a>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

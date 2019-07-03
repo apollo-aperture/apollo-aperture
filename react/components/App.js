@@ -1,19 +1,20 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './header';
-import Hierarchy from './hierarchy';
+import SidebarContainer from './sidebarContainer';
+import MainContainer from './mainContainer';
+import Footer from './footer';
 
 const App = () => (
-  <div>
-    <Router>
-      <div>
-        <Header/>
-        <Switch>
-          <Route exact path="/" component={Hierarchy} />
-        </Switch>
+  <Router>
+    <div>
+      <Header/>
+      <div className="content-container">
+        <SidebarContainer/>
+        <MainContainer/>
       </div>
-    </Router>
-  </div>
+    </div>
+  </Router>
 );
 
 export default App;
