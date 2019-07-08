@@ -4,51 +4,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const multer = require('multer'); // File handler
 const formidable = require('formidable');
-// const formidableMiddleware = require('express-formidable');
 const fs = require('fs');
 const getFile = require('./ast/getFiles');
-const glob = require('glob');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// const corsOptions = {
-//   origin: '*',
-//   optionsSuccessStatus: 200,
-// };
-
 app.use(cors());
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-});
-
-// filename: function (req, file, cb) {
-//   cb(null, Date.now() + '-' +file.originalname )
-// }
-
-// let upload = multer({ storage: storage }).single('file');
-const upload = multer({storage});
-
-/*app.post('/api/upload', upload.single('test'), (req, res, next) => {
-  /!*const file = req.file;
-  if (!file) {
-    console.log('err');
-  }*!/
-  console.log('ran');
-});*/
-
+// this route processes the App.js file
 app.get('/api/d3json', (req, res) => {
   const filePath = path.join(__dirname, 'uploads', 'App.js');
+  // read the /uploads/App.js file
   fs.readFile(filePath, 'utf8', (err, file) => {
     processAST(file)
       .then(data => {
@@ -57,6 +27,8 @@ app.get('/api/d3json', (req, res) => {
   });
 });
 
+// POST route to allow user to upload a React/Apollo file
+// the file is uploaded to the /uploads directory
 app.post('/api/upload', (req, res) => {
   const form = new formidable.IncomingForm();
 
@@ -80,9 +52,10 @@ app.listen(3000, () => {
   console.log('Server listening on Port 3000')
 });
 
+// initiates AST traversal on the file passed in as an argument to processAST
 function processAST(file) {
   return new Promise((resolve, reject) => {
-    getFile.fileToUpload(file)
+    getFile.fileToTraverse(file)
       .then(data => {
         // console.log('got data', data);
         resolve(data);
@@ -96,7 +69,7 @@ function processAST(file) {
 
 /*const pathName = path.join(__dirname, '..', 'server', 'samples', 'todo', 'App.js');
 fs.readFile(pathName, 'utf8', (err, file) => {
-  getFile.fileToUpload(file)
+  getFile.fileToTraverse(file)
     .then(data => {
       console.log('got data', data);
     })

@@ -1,3 +1,4 @@
+// for traversing through to-do application
 const parser = require('@babel/parser'),
   traverse = require('@babel/traverse').default,
   t = require('@babel/types'),
