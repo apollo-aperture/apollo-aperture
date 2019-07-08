@@ -1,3 +1,4 @@
+// another version that traverses through the to-do app
 const parser = require('@babel/parser'),
   traverse = require('@babel/traverse').default,
   t = require('@babel/types'),

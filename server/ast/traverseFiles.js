@@ -1,3 +1,4 @@
+/* This file actually creates the JSON file which is used by the visualizer */
 const parser = require('@babel/parser'),
   traverse = require('@babel/traverse').default,
   t = require('@babel/types'),
@@ -9,24 +10,17 @@ const parser = require('@babel/parser'),
 // const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
 // const filePath = path.join(__dirname, '..', 'samples', 'todo', 'index.js');
 
-const getFilePromisified = (filePath) => {
+// OLD promisified file
+/*const getFilePromisified = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, file) => {
       if (err) reject(err);
       resolve(file);
     });
   });
-};
+};*/
 
-
-
-function OriginalHierarchyConstructor() {
-  this.components = [];
-  this.query = {
-    children: []
-  };
-};
-
+// this hierarchy constructor was used to conform with Raffi's d3 implementation
 function HierarchyConstructor() {
   this.name = 'Query';
   this.children = [];
@@ -36,22 +30,31 @@ HierarchyConstructor.prototype.addChildren = function(componentName) {
   this.children.push({name: componentName});
 };
 
-OriginalHierarchyConstructor.prototype.addComponent = function(componentName){
-  this.components.push(componentName);
-};
+// Old hierarchy constructor
+// This was used and worked previously
+/*function OriginalHierarchyConstructor() {
+  this.components = [];
+  this.query = {
+    children: []
+  };
+};*/
 
-OriginalHierarchyConstructor.prototype.addChildComponent = function(componentName) {
+/*OriginalHierarchyConstructor.prototype.addComponent = function(componentName){
+  this.components.push(componentName);
+};*/
+
+/*OriginalHierarchyConstructor.prototype.addChildComponent = function(componentName) {
   for (let i = 0; i < this.components.length; i++) {
     if (this.components[i] === componentName) {
       this.query.children.push(componentName);
     }
   }
-};
-
+};*/
 const hierarchy = new HierarchyConstructor();
 // const newHierarchy = new OriginalHierarchyConstructor();
 
 const traverseFiles = {
+  // default is used so this function can be named and invoked on module.exports
   default() {
     return async function findContent(file) {
       // search for ApolloClient declaration and copy body to apolloClientVar
