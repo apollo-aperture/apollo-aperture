@@ -82,12 +82,12 @@ const findQueries = ast => {
 };
 
 //***//
-console.log(traverseFiles.default());
+traverseFiles.default();
 console.log(hierarchy);
 
 //this is a stateful traversal ***
 const cache = [];
-
+//console.log(ast)
 function traverseAst(ast) {
   const visitorUtility = {
     ClassDeclaration(path) {
@@ -114,7 +114,6 @@ function traverseAst(ast) {
       });
     }
   };
-
   traverse(ast, {
     enter(path) {
       path.traverse(visitorUtility);
@@ -122,7 +121,7 @@ function traverseAst(ast) {
   });
 }
 
-traverseAst(ast);
+//traverseAst(ast);
 
 const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(el => {  // Push the components to the store. Components filter from cache. 
   if (!htmlElementsToIgnore[ el.node.name ]) {
@@ -131,5 +130,5 @@ const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(e
     }
   }
 });
-console.log(components);
+//console.log(components);
 //*** */
