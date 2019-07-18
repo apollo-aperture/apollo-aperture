@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
+import logo from './logo.svg';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -11,19 +11,19 @@ class App extends Component {
       // blogTitle: 'My Blog',
       posts: [
         {
-          title: "Post 1",
-          text: "First text thing, hi"
+          title: 'Post 1',
+          text: 'First text thing, hi',
         },
         {
-          title: "Post 2",
-          text: "Second one, here we go"
+          title: 'Post 2',
+          text: 'Second one, here we go',
         },
         {
-          title: "Post 3",
-          text: "Third text box is here, wow"
-        }
+          title: 'Post 3',
+          text: 'Third text box is here, wow',
+        },
       ],
-      selectedPost: "None"
+      selectedPost: 'None',
     };
     this.highlightSelectedPost = this.highlightSelectedPost.bind(this);
   }
@@ -31,7 +31,7 @@ class App extends Component {
   highlightSelectedPost(e) {
     const selectedPost = e.currentTarget.id;
     this.setState({
-      selectedPost: selectedPost
+      selectedPost,
     });
   }
 
@@ -55,25 +55,31 @@ class App extends Component {
 const ExchangeRates = () => (
   <Query
     query={gql`
-        {
-          rates(currency: "USD") {
-            currency
-            rate
-          }
+      {
+        rates(currency: "USD") {
+          currency
+          rate
         }
-      `}
+      }
+    `}
   >
-    {({ loading, error, data, refetch }) => {
+    {({
+      loading, error, data, refetch,
+    }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
-      let arrayOfCurrencies = [];
+      const arrayOfCurrencies = [];
       data.rates.map(({ currency, rate }) => {
-          arrayOfCurrencies.push(<InnerPost currency={currency} rate={rate} />)
-        }
-      )
-      return /*data.rates.map(({ currency, rate }) =>*/ (
-        <div>
-          <button style={{ "height": "50px", "width": "100px" }} onClick={() => refetch()}>Refetch!</button>
+        arrayOfCurrencies.push(<InnerPost currency={currency} rate={rate} />);
+      });
+      return (
+        /* data.rates.map(({ currency, rate }) => */ <div>
+          <button
+            style={{ height: '50px', width: '100px' }}
+            onClick={() => refetch()}
+          >
+            Refetch!
+          </button>
           {arrayOfCurrencies}
         </div>
       );
@@ -81,16 +87,12 @@ const ExchangeRates = () => (
   </Query>
 );
 
-
-const TitleDiv = () => {
+const TitleDiv = () => (
   // console.log(props);
-  return (
-    <div>
-      <h1>Blog Title</h1>
-    </div>
-  );
-};
-
+  <div>
+    <h1>Blog Title</h1>
+  </div>
+);
 const PostsContainer = props => {
   const innerPosts = props.posts;
   return (
@@ -103,7 +105,6 @@ const PostsContainer = props => {
           text={post.text}
           highlightSelectedPost={props.highlightSelectedPost}
           selectedPost={props.selectedPost}
-
         />
       ))}
       <ExchangeRates />
@@ -111,16 +112,15 @@ const PostsContainer = props => {
   );
 };
 
-
 const Post = props => {
   const handleClick = e => {
     props.highlightSelectedPost(e);
   };
   let style;
   if (props.id === props.selectedPost) {
-    style = { backgroundColor: "lightBlue" };
+    style = { backgroundColor: 'lightBlue' };
   } else {
-    style = { backgroundColor: "yellow" };
+    style = { backgroundColor: 'yellow' };
   }
   return (
     <div id={props.id} className="outline" onClick={handleClick} style={style}>
@@ -134,12 +134,15 @@ const Post = props => {
 const InnerPost = props => {
   const { currency, rate } = props;
   return (
-    <div style={{ backgroundColor: "orange", width: "100px", height: "100px" }}>
-      <p><b>{currency}</b></p>
-      <p><b>{rate}</b></p>
+    <div style={{ backgroundColor: 'orange', width: '100px', height: '100px' }}>
+      <p>
+        <b>{currency}</b>
+      </p>
+      <p>
+        <b>{rate}</b>
+      </p>
     </div>
   );
 };
-
 
 export default App;

@@ -3,5 +3,6 @@
   "tabWidth": 2,
   "useTabs": false,
   "singleQuote": true,
-  "jsxBracketSameLine": false
+  "jsxBracketSameLine": false,
+  "trailingComma": "all"
 }
