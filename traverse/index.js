@@ -6,15 +6,19 @@ const fs = require('fs');
 // for each file, create a map
 // return a json object of the mapping
 
+const globPath = '../samples/spacex/src/**/*.js';
+
 // load the selected directory
 function globAction(err, files) {
   if (err) {
-    console.log(err);
+    return err;
   }
-  console.log('files: ', files);
+  files.forEach(el => {
+    console.log(el);
+  });
 }
 
-glob('./*.js', globAction);
+glob(globPath, globAction);
 // const app = 'foo';
 //
 // module.exports = function init() {
