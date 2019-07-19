@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
-import "./App.css";
+import React, { Component } from 'react';
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
+import './App.css';
 
 class App extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { todos: ["Blog Post #1", "Blog Post #2"], input: "" };
+    this.state = { todos: ['Blog Post #1', 'Blog Post #2'], input: '' };
   }
   add = () => {
     const copy = this.state.todos.slice();
     copy.push(this.state.input);
-    this.setState({ todos: copy, input: "" });
+    this.setState({ todos: copy, input: '' });
   };
 
   change = e => {
@@ -72,12 +72,11 @@ const PostsContainer = props => {
   );
 };
 
-
 //outer components
 const InnerPost = props => {
   const { name, home_port } = props;
   return (
-    <div style={{ backgroundColor: "orange", width: "400px", height: "100px" }}>
+    <div style={{ backgroundColor: 'orange', width: '400px', height: '100px' }}>
       <p>
         Ship's Name
         <br />
@@ -99,9 +98,9 @@ const InnerPost = props => {
 const ChildPost = props => {
   const { home } = props;
   return (
-    <p style={{ backgroundColor: "white", width: "400px", height: "60px" }}>
-    Home Port
-    <br></br>
+    <p style={{ backgroundColor: 'white', width: '400px', height: '60px' }}>
+      Home Port
+      <br></br>
       {home}
     </p>
   );

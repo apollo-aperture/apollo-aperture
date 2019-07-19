@@ -1,0 +1,32 @@
+{
+  "extends": ["plugin:prettier/recommended", "prettier/react","airbnb", "prettier/react", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "plugins": ["prettier", "react"],
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-param-reassign": "off",
+    "arrow-parens": "off",
+    "no-console": "warn",
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "eol-last": "off"
+  },
+}
