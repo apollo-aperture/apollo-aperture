@@ -1,0 +1,111 @@
+html,body {
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  color: rgb(55, 55, 55);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a:visited, a {
+  color: rgb(55,55,55);
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(29, 29, 29);
+  text-decoration: none;
+}
+
+h1 {
+  margin: 0;
+}
+
+.content-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.main-container {
+  float: left;
+  margin: auto;
+  padding: 20px;
+}
+
+.sidebar-container {
+  padding: 20px;
+  width: 300px;
+  float: left;
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  background-color: #e8e8e8
+}
+
+.flex-inner {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.flex-inner > button {
+  display: block;
+  margin: 20px auto;
+  background-color: #cbf3fb;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.container-fluid {
+  width: 100%;
+  overflow: hidden;
+}
+
+.blue-bg {
+  background-color: rgb(168, 203, 255);
+}
+
+ul {
+  margin: auto;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.container > h1 {
+  display: inline-block;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  height: auto;
+}
+
+.menu > a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 5px;
+}
+
+.menu > a:first-child {
+  border-right: none;
+}
+
+.footer {
+
+}
