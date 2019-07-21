@@ -4,10 +4,10 @@ const parser = require('@babel/parser'),
   t = require('@babel/types'),
   fs = require('fs'),
   path = require('path'),
-  htmlElementsToIgnore = require('./util/htmlElements');
+  htmlElementsToIgnore = require('../traverse/util/htmlElements.js');
 
-const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
-// const filePath = path.join(__dirname, '..', 'samples', 'todo', 'index.js');
+//const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
+const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
 const file = fs.readFileSync(filePath, 'utf8');
 
 const ast = parser.parse(file, {
@@ -63,14 +63,12 @@ const findQueries = ast => {
       traverse(path.node, {
         JSXElement(path) {
           if (path.node.openingElement.name.name === 'Query') {
-
           }
           traverse(path.node, {
             ExpressionStatement(path) {
               traverse(path.node, {
                 JSXIdentifier(path) {
                   hierarchy.addChildren(path.node.name);
-                  // console.log(path.node.name);
                 }
               }, path.scope, path.parent);
             }
@@ -82,12 +80,11 @@ const findQueries = ast => {
 };
 
 //***//
-traverseFiles.default();
-console.log(hierarchy);
+// traverseFiles.default();
+// console.log(hierarchy);
 
 //this is a stateful traversal ***
 const cache = [];
-//console.log(ast)
 function traverseAst(ast) {
   const visitorUtility = {
     ClassDeclaration(path) {
@@ -121,14 +118,17 @@ function traverseAst(ast) {
   });
 }
 
-//traverseAst(ast);
+traverseAst(ast);
 
 const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(el => {  // Push the components to the store. Components filter from cache. 
+  //console.log(el);
   if (!htmlElementsToIgnore[ el.node.name ]) {
-    if (el.node.name === 'Mutation') {
+    if (el.node.name === 'Query') {
       return true;
     }
+    hierarchy.addChildren(el.node.name);
   }
 });
+
 //console.log(components);
-//*** */
+console.log(hierarchy);
