@@ -1,5 +1,6 @@
-html,body {
-  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+html,
+body {
+  font-family: "Source Sans Pro", "Arial", sans-serif;
   color: rgb(55, 55, 55);
   width: 100%;
   height: 100%;
@@ -7,8 +8,9 @@ html,body {
   box-sizing: border-box;
 }
 
-a:visited, a {
-  color: rgb(55,55,55);
+a:visited,
+a {
+  color: rgb(55, 55, 55);
   text-decoration: none;
 }
 a:hover {
@@ -22,12 +24,17 @@ h1 {
 
 .content-container {
   width: 100%;
+  height: 100%;
+  flex-direction: row;
   overflow: auto;
 }
 
 .main-container {
-  float: left;
+  display: flex;
+  flex-direction: column;
   margin: auto;
+  flex-grow: 2;
+  height: 100%;
   padding: 20px;
 }
 
@@ -39,7 +46,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  background-color: #e8e8e8
+  background-color: #e8e8e8;
 }
 
 .flex-inner {
@@ -107,5 +114,4 @@ li {
 }
 
 .footer {
-
 }
