@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
-  "homepage": "./",
+  "homepage": "http://apolloaperture.com",
   "dependencies": {
     "@babel/parser": "^7.4.5",
     "@babel/traverse": "^7.4.5",
