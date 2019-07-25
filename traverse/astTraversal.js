@@ -4,7 +4,7 @@ const parser = require('@babel/parser'),
   t = require('@babel/types'),
   fs = require('fs'),
   path = require('path'),
-  htmlElementsToIgnore = require('../traverse/util/htmlElements.js');
+  htmlElementsToIgnore = require('./util/htmlElementsToIgnore.js');
 
 //const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
 const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
