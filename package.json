@@ -15,21 +15,16 @@
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
-    "electron": "^5.0.2",
-    "electron-builder": "^20.43.0",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb": "^17.1.1",
+    "eslint": "5.3.0",
+    "eslint-config-airbnb": "17.1.1",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.5.1",
-    "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2"
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "webpack-dev": "webpack-dev-server --open",
