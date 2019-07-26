@@ -1,5 +1,11 @@
 {
-  "extends": ["plugin:prettier/recommended", "prettier/react","airbnb", "prettier/react", "plugin:react/recommended"],
+//  "extends": ["plugin:prettier/recommended", "prettier/react","airbnb", "prettier/react", "plugin:react/recommended"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -10,14 +16,22 @@
     "node": true,
     "jest": true
   },
-  "plugins": ["prettier", "react"],
+//  "plugins": ["prettier", "react"],
   "rules": {
+    "comma-dangle": ["warn", {
+      "functions": "never",
+      "objects": "always-multiline"
+    }],
+    "implicit-arrow-linebreak": "warn",
     "prettier/prettier": "warn",
     "no-param-reassign": "off",
     "arrow-parens": "off",
     "no-console": "warn",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
+    "consistent-return": "off",
+    "function-paren-newline": "warn",
+    "arrow-body-style": "warn",
     "react/jsx-filename-extension": [
       1,
       {
@@ -28,5 +42,5 @@
       }
     ],
     "eol-last": "off"
-  },
+  }
 }
