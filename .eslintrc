@@ -22,6 +22,7 @@
       "functions": "never",
       "objects": "always-multiline"
     }],
+    "array-callback-return": "off",
     "implicit-arrow-linebreak": "warn",
     "prettier/prettier": "warn",
     "no-param-reassign": "off",
