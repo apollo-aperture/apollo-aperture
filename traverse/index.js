@@ -31,10 +31,7 @@ async function init(filePath) {
         });
 
         // process ast for each file
-        findComponents(ast).then(result => {
-          hierarchy.addChildren(result);
-        });
-        // hierarchy.addChildren('foo');
+        findComponents(ast, hierarchy);
       });
     });
     return hierarchy;
