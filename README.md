@@ -5,4 +5,4 @@ Currently Apollo Aperture is a desktop application that analyzes Apollo and Reac
 
 ![Image of screenshot](https://imgur.com/Ej1rp5u.png)
 
-![Image of code](https://imgur.com/yLt9r5c.png)
+<img src="https://imgur.com/yLt9r5c.png"  width="450" height="550">
