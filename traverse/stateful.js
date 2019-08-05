@@ -1,6 +1,6 @@
-// const parser = require('@babel/parser');
+const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
-// const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
+const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
 
 function traverseAst(ast) {
   const cache = [];
