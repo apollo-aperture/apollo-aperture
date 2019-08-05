@@ -1,5 +1,5 @@
 ## Getting Started
-Apollo Aperture runs as an Electron based desktop application. To use it, clone our repo, install the required node packages, and build the desktop application. Or you can download the executable from our website.  
+Apollo Aperture runs as an Electron based desktop application. To use it, clone our repo, install the required node packages, and build the desktop application. Or you can download the executable from our website (pending launch of website).  
 
 Install Apollo Aperture
 1. Clone this repo
