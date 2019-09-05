@@ -17,18 +17,23 @@ const ast = parser.parse(file, {
 
 //this is our main store
 // this hierarchy constructor was used to conform with Raffi's d3 implementation
-function HierarchyConstructor() {
-  this.name = 'Query';
-  this.children = [];
+const HierarchyContainer = {
+  Query: []
+}
+// function HierarchyConstructor() {
+//   this.name = 'Query';
+//   this.children = [];
+// }
+
+// HierarchyConstructor.prototype.addChildren = function(componentName) {
+//   this.children.push({name: componentName});
+// };
+
+const addChildren = (componentName) => {
+  HierarchyContainer.Query.push({name: componentName});
 }
 
-HierarchyConstructor.prototype.addChildren = function(componentName) {
-  this.children.push({name: componentName});
-};
-
-const hierarchy = new HierarchyConstructor();
-// const newHierarchy = new OriginalHierarchyConstructor();
-
+// const hierarchy = new HierarchyConstructor();
 
 //this is a stateless traversal ***
 const traverseFiles = {
@@ -39,7 +44,8 @@ const traverseFiles = {
       // first find the file that we want so we can read it
       findComponents(ast);
       findQueries(ast);
-      return hierarchy;
+      //return hierarchy
+      return HierarchyContainer;
   }
 };
 
@@ -68,7 +74,8 @@ const findQueries = ast => {
             ExpressionStatement(path) {
               traverse(path.node, {
                 JSXIdentifier(path) {
-                  hierarchy.addChildren(path.node.name);
+                  // hierarchy.addChildren(path.node.name);
+                  addChildren(path.node.name);
                 }
               }, path.scope, path.parent);
             }
@@ -79,9 +86,6 @@ const findQueries = ast => {
   });
 };
 
-//***//
-// traverseFiles.default();
-// console.log(hierarchy);
 
 //this is a stateful traversal ***
 const cache = [];
@@ -126,9 +130,12 @@ const components = cache.filter(el => el.node.type === 'JSXIdentifier').filter(e
     if (el.node.name === 'Query') {
       return true;
     }
-    hierarchy.addChildren(el.node.name);
+    //hierarchy.addChildren(el.node.name);
+      addChildren(el.node.name);
   }
 });
 
-//console.log(components);
-console.log(hierarchy);
+console.log(components);
+console.log(HierarchyContainer);
+
+module.exports = HierarchyContainer;
