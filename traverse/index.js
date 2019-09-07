@@ -3,14 +3,20 @@ const parser = require('@babel/parser');
 const traverseFiles = require('./traverseFiles');
 const findComponents = require('./findComponents');
 
-function HierarchyConstructor() {
-  this.name = 'Query';
-  this.children = [];
+//testing purposes
+const path = require('path');
+const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
+const file = fs.readFileSync(filePath, 'utf8');
+const ast = parser.parse(file, {
+  sourceType: 'module',
+  plugins: [ 'jsx' ]
+});
+
+//Main container of our components
+const hierarchyContainer = {
+  Query: []
 }
 
-HierarchyConstructor.prototype.addChildren = componentName => {
-  this.children.push({ name: componentName });
-};
 
 async function init(filePath) {
   try {
@@ -20,8 +26,9 @@ async function init(filePath) {
     // then run it through the AST traversal
     // then use the output of the traversal to add to the hierarchy
 
-    const hierarchy = new HierarchyConstructor();
+    //const hierarchy = new HierarchyConstructor();
 
+    // files ['lauches.js', 'dateOfLaunch.js', 'query.js']
     files.forEach(file => {
       fs.readFile(file, 'utf8', (err, data) => {
         if (err) return err;
@@ -31,10 +38,15 @@ async function init(filePath) {
         });
 
         // process ast for each file
-        findComponents(ast, hierarchy);
+        findComponents(ast, hierarchyContainer);
+        // 1 - react component Launches
+        // 2 - react component DateOfLaunch
+        // 3 - Apollo Query - that has Launches and DateOfLaunch as child components
+        // {Query: 'LaunchQuery', children: ['Launches', 'DateOfLaunch']}
       });
     });
-    return hierarchy;
+    //return hierarchy;
+    return hierarchyContainer;
     // add each query or component to the hierarchy constructor
   } catch (err) {
     return err;
@@ -59,5 +71,9 @@ traverseFiles('../samples/spacex/src/components/Launches.js')
     console.log(err);
   });
 */
+
+findComponents(ast, hierarchyContainer);
+
+//console.log(hierarchyContainer);
 
 module.exports = init;

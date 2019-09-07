@@ -1,9 +1,16 @@
+// find components - gets a list of various react and apollo components
+// it would do this by invoking functions that get components from stateless, stateful, 
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const path = require('path');
 const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
 const stateful = require('./stateful');
 const fs = require('fs');
+
+const addChildren = (componentName, hierarchy) => {
+  hierarchy.Query.push({name: componentName});
+}
+
 
 function statefulTraversal(ast) {
   const cache = [];
@@ -19,7 +26,6 @@ function statefulTraversal(ast) {
                     ReturnStatement(path) {
                       path.traverse({
                         JSXIdentifier(path) {
-                          // hierarchy.addChildren(path);
                           cache.push(path);
                         },
                       });
@@ -48,14 +54,19 @@ const filterNodes = (nodes, hierarchy) => {
       if (innerNode.node.name === 'Query') {
         console.log(true);
       }
-      hierarchy.addChildren(innerNode.node.name);
+     addChildren(innerNode.node.name, hierarchy);
   });
 };
 
 const findComponents = (ast, hierarchy) => {
-  const nodes = statefulTraversal(ast);
-  filterNodes(nodes, hierarchy);
-  console.log(hierarchy);
+  const statefulNodes = statefulTraversal(ast); // checks if the ast is a stateful component. if yes, then it returns the hierarchy// return ['DateOfLaunch'];
+  // const statelessNodes = statelessTraversal(ast); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
+  // const queryNode = queryTraversal(ast); // ['Query' - children 'DateOfLaunch', 'Launches']
+  filterNodes(statefulNodes, hierarchy);
+  // Query
+  // 1st child - Launch Sites - child component - Launch date - 
+  // {Query: 'Launches', children: ['Laun']}
 };
+
 
 module.exports = findComponents;
