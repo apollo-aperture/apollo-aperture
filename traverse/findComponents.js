@@ -108,8 +108,8 @@ const findQueries = (ast, hierarchy) => {
 //this is End of stateless traversal ***
 
 const findComponents = (ast, hierarchy) => {
-  // const statefulNodes = statefulTraversal(ast); 
-  // filterNodes(statefulNodes, hierarchy);
+  const statefulNodes = statefulTraversal(ast); 
+  filterNodes(statefulNodes, hierarchy);
   statelessTraversal.default(ast, hierarchy); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
   // const queryNode = queryTraversal(ast); // ['Query' - children 'DateOfLaunch', 'Launches']
   // Query
