@@ -3,7 +3,7 @@ const parser = require('@babel/parser');
 const traverseFiles = require('./traverseFiles');
 const findComponents = require('./findComponents');
 
-//testing purposes
+//testing purposes//
 const path = require('path');
 const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
 const file = fs.readFileSync(filePath, 'utf8');
@@ -11,6 +11,7 @@ const ast = parser.parse(file, {
   sourceType: 'module',
   plugins: [ 'jsx' ]
 });
+//testing purposes//
 
 //Main container of our components
 const hierarchyContainer = {
@@ -74,6 +75,6 @@ traverseFiles('../samples/spacex/src/components/Launches.js')
 
 findComponents(ast, hierarchyContainer);
 
-//console.log(hierarchyContainer);
+console.log(hierarchyContainer);
 
 module.exports = init;
