@@ -6,7 +6,7 @@ const parser = require('@babel/parser'),
   path = require('path'),
   htmlElementsToIgnore = require('./util/htmlElementsToIgnore.js');
 
-//const filePath = path.join(__dirname, '..', 'samples', 'todo', 'App.js');
+//const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
 const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateless.js');
 const file = fs.readFileSync(filePath, 'utf8');
 
@@ -86,6 +86,8 @@ const findQueries = ast => {
     }
   });
 };
+
+//this is End of stateless traversal ***
 
 //this is a stateful traversal ***
 // const cache = [];

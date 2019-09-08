@@ -5,7 +5,8 @@ const findComponents = require('./findComponents');
 
 //testing purposes//
 const path = require('path');
-const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
+//const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
+const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateless.js');
 const file = fs.readFileSync(filePath, 'utf8');
 const ast = parser.parse(file, {
   sourceType: 'module',
