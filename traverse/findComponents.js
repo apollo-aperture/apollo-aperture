@@ -66,7 +66,6 @@ const statelessTraversal = {
       // first find the file that we want so we can read it
       findStatelessComponents(ast, hierarchy);
       findQueries(ast, hierarchy);
-      //return hierarchy
       return hierarchy;
   }
 };
@@ -96,7 +95,6 @@ const findQueries = (ast, hierarchy) => {
             ExpressionStatement(path) {
               traverse(path.node, {
                 JSXIdentifier(path) {
-                  // hierarchy.addChildren(path.node.name);
                   addChildren(path.node.name, hierarchy);
                 }
               }, path.scope, path.parent);
@@ -107,11 +105,10 @@ const findQueries = (ast, hierarchy) => {
     }
   });
 };
-
 //this is End of stateless traversal ***
 
 const findComponents = (ast, hierarchy) => {
-  // const statefulNodes = statefulTraversal(ast); // checks if the ast is a stateful component. if yes, then it returns the hierarchy// return ['DateOfLaunch'];
+  // const statefulNodes = statefulTraversal(ast); 
   // filterNodes(statefulNodes, hierarchy);
   statelessTraversal.default(ast, hierarchy); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
   // const queryNode = queryTraversal(ast); // ['Query' - children 'DateOfLaunch', 'Launches']
