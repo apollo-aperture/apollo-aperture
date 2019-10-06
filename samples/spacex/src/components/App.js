@@ -24,17 +24,19 @@ class App extends Component {
         {({ loading, error, data, refetch }) => {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
-          let arrayOfships = [];
-          for (let i = 0; i < data.launchesPast.length - 7; i++) {
-            arrayOfships.push(
-              <Launches
-                key={[i]}
-                name={data.launchesPast[0].ships[i].name}
-                home_port={data.launchesPast[0].ships[i].home_port}
-              />,
-            );
+          let arrayOfShips = [];
+          for (let i = 0; i < data.launchesPast.length; i++) {
+            if (data.launchesPast[i].ships.length > 0) {
+              arrayOfShips.push(
+                <Launches
+                  key={[i]}
+                  name={data.launchesPast[i].ships[0].name}
+                  home_port={data.launchesPast[i].ships[0].home_port}
+                />
+              );
+            }
           }
-          return <div>{arrayOfships}</div>;
+          return <div>{arrayOfShips}</div>;
         }}
       </Query>
     );
