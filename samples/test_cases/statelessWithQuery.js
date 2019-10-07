@@ -9,6 +9,7 @@ const Stateless = () => (
 const InnerStateless = () => (
   <div>
     <h1>Inner Stateless Component</h1>
+    <Query getUser={GET_STATELESSUSER}/>
   </div>
 );
 

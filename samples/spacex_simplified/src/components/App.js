@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
-import Launches from './Launches';
+import HomePort from './HomePort';
+
+const ShipName = props => {
+  const { name } = props;
+  return (
+    <div>
+      <p>Ship Name: {name}</p>
+    </div>
+  );
+};
+
+const style = {
+  border: '1px solid black',
+};
+
+const Launches = props => {
+  const { name, home_port } = props;
+  return (
+    <div style={style}>
+      <ShipName name={name} />
+      <HomePort home_port={home_port} />
+    </div>
+  );
+};
 
 class App extends Component {
   constructor() {
@@ -25,16 +48,14 @@ class App extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error :(</p>;
           let arrayOfships = [];
-          for (let i = 0; i < data.launchesPast.length; i++) {
-            if (data.launchesPast[i].ships.length > 0) {
-              arrayOfships.push(
-                <Launches
-                  key={[i]}
-                  name={data.launchesPast[i].ships[0].name}
-                  home_port={data.launchesPast[i].ships[0].home_port}
-                />
-              );
-            }
+          for (let i = 0; i < data.launchesPast.length - 7; i++) {
+            arrayOfships.push(
+              <Launches
+                key={[i]}
+                name={data.launchesPast[1].ships[i].name}
+                home_port={data.launchesPast[1].ships[i].home_port}
+              />
+            );
           }
           return <div>{arrayOfships}</div>;
         }}

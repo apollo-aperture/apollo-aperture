@@ -3,8 +3,8 @@ const init = require('../traverse/index');
 const traverseFiles = require('../traverse/traverseFiles');
 const findComponents = require('../traverse/findComponents');
 
-const testSamplesPath = '__tests__/test_samples/spacex/src/**/*.js';
-const singleFilePath = '__tests__/test_samples/spacex_simplified/src/components/App.js';
+const testSamplesPath = '../samples/spacex/src/**/*.js';
+const singleFilePath = '../samples/spacex_simplified/src/components/App.js';
 
 describe('read files', () => {
   test('gets the correct file names', () => {

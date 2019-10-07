@@ -1,5 +1,5 @@
 // find components - gets a list of various react and apollo components
-// it would do this by invoking functions that get components from stateless, stateful, 
+// it would do this by invoking functions that get components from stateless, stateful,
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
 const path = require('path');
@@ -8,8 +8,8 @@ const stateful = require('./stateful');
 const fs = require('fs');
 
 const addChildren = (componentName, hierarchy) => {
-  hierarchy.Query.push({name: componentName});
-}
+  hierarchy.Query.push({ name: componentName });
+};
 
 function statefulTraversal(ast) {
   const cache = [];
@@ -53,69 +53,91 @@ const filterNodes = (nodes, hierarchy) => {
       if (innerNode.node.name === 'Query') {
         console.log(true);
       }
-     addChildren(innerNode.node.name, hierarchy);
-  });
+      addChildren(innerNode.node.name, hierarchy);
+    });
 };
 
-//this is a stateless traversal ***
+// this is a stateless traversal ***
 const statelessTraversal = {
   // default is used so this function can be named and invoked on module.exports
   default(ast, hierarchy) {
-      // search for ApolloClient declaration and copy body to apolloClientVar
-      // first look for REACTDOM import to find if we're in the index.js file
-      // first find the file that we want so we can read it
-      findStatelessComponents(ast, hierarchy);
-      findQueries(ast, hierarchy);
-      return hierarchy;
-  }
+    // search for ApolloClient declaration and copy body to apolloClientVar
+    // first look for REACTDOM import to find if we're in the index.js file
+    // first find the file that we want so we can read it
+    findStatelessComponents(ast, hierarchy);
+    findQueries(ast, hierarchy);
+    return hierarchy;
+  },
 };
 
 const findStatelessComponents = (ast, hierarchy) => {
   traverse(ast, {
     VariableDeclarator(path) {
-      traverse(path.node, {
-        JSXElement(path) {
-          if (!htmlElementsToIgnore[ path.node.openingElement.name.name ] && path.parent.type !== 'CallExpression') {
-            addChildren(path.node.openingElement.name.name, hierarchy);
-          }
-        }
-      }, path.scope, path.parent);
-    }
+      traverse(
+        path.node,
+        {
+          JSXElement(path) {
+            if (
+              !htmlElementsToIgnore[path.node.openingElement.name.name] &&
+              path.parent.type !== 'CallExpression'
+            ) {
+              addChildren(path.node.openingElement.name.name, hierarchy);
+            }
+          },
+        },
+        path.scope,
+        path.parent
+      );
+    },
   });
 };
 
 const findQueries = (ast, hierarchy) => {
-    traverse(ast, {
+  traverse(ast, {
     VariableDeclarator(path) {
-      traverse(path.node, {
-        JSXElement(path) {
-          if (path.node.openingElement.name.name === 'Query') {
-          }
-          traverse(path.node, {
-            ExpressionStatement(path) {
-              traverse(path.node, {
-                JSXIdentifier(path) {
-                  addChildren(path.node.name, hierarchy);
-                }
-              }, path.scope, path.parent);
+      traverse(
+        path.node,
+        {
+          JSXElement(path) {
+            if (path.node.openingElement.name.name === 'Query') {
             }
-          }, path.scope, path.parent);
-        }
-      }, path.scope, path.parent);
-    }
+            traverse(
+              path.node,
+              {
+                ExpressionStatement(path) {
+                  traverse(
+                    path.node,
+                    {
+                      JSXIdentifier(path) {
+                        addChildren(path.node.name, hierarchy);
+                      },
+                    },
+                    path.scope,
+                    path.parent
+                  );
+                },
+              },
+              path.scope,
+              path.parent
+            );
+          },
+        },
+        path.scope,
+        path.parent
+      );
+    },
   });
 };
-//this is End of stateless traversal ***
+// this is End of stateless traversal ***
 
 const findComponents = (ast, hierarchy) => {
-  const statefulNodes = statefulTraversal(ast); 
+  const statefulNodes = statefulTraversal(ast);
   filterNodes(statefulNodes, hierarchy);
   statelessTraversal.default(ast, hierarchy); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
   // const queryNode = queryTraversal(ast); // ['Query' - children 'DateOfLaunch', 'Launches']
   // Query
-  // 1st child - Launch Sites - child component - Launch date - 
+  // 1st child - Launch Sites - child component - Launch date -
   // {Query: 'Launches', children: ['Laun']}
 };
-
 
 module.exports = findComponents;
