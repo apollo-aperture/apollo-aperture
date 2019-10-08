@@ -8,7 +8,16 @@ const stateful = require('./stateful');
 const fs = require('fs');
 
 const addChildren = (componentName, hierarchy) => {
-  hierarchy.Query.push({ name: componentName });
+  // hierarchy.Query.push({ name: componentName })
+  let count = 1;
+
+  if(componentName === 'Query'){
+    hierarchy.name = 'Query' + count;
+    count++;
+  } else {
+    hierarchy.children.push({ name: componentName });
+  }
+  
 };
 
 function statefulTraversal(ast) {

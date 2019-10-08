@@ -17,7 +17,8 @@ const ast = parser.parse(file, {
 
 // Main container of our components
 const hierarchyContainer = {
-  Query: [],
+  name: '',
+  children: [],
 };
 
 async function init(filePath) {
