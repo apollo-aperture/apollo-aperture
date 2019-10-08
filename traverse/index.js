@@ -4,6 +4,8 @@ const path = require('path');
 const traverseFiles = require('./traverseFiles');
 const findStatelessComponents = require('./stateless');
 const findComponents = require('./findComponents');
+const findStatefulComponents = require('./stateful');
+
 
 // testing purposes//
 const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
@@ -78,8 +80,6 @@ traverseFiles('../samples/spacex/src/components/Launches.js')
   });
 */
 
-findComponents(ast, hierarchyContainer);
-
-console.log(hierarchyContainer);
+findStatefulComponents(ast)
 
 module.exports = init;
