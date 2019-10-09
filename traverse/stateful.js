@@ -64,7 +64,7 @@ function findStatefulComponents(ast) {
 
   const statefulNodes = statefulTraversal(ast);
   filterNodes(statefulNodes)
-  return hierarchyContainer;
+  //return hierarchyContainer;
   console.log(hierarchyContainer);
 }
 

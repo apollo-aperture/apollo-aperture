@@ -46,6 +46,7 @@ async function init(filePath) {
         findComponents(ast, hierarchyContainer);
         // run a function to find stateless components
         const statelessComponents = findStatelessComponents(ast);
+        const statefulComponents = findStatefulComponents(ast);
         // run a function to find stateful components
         // 1 - react component Launches
         // 2 - react component DateOfLaunch
@@ -62,23 +63,6 @@ async function init(filePath) {
   }
 }
 
-/*
-traverseFiles('../samples/spacex/src/components/Launches.js')
-  .then(files => {
-    files.forEach(file => {
-      assembleComponents(file)
-        .then(ast => {
-          console.log('ast', ast);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
-  })
-  .catch(err => {
-    console.log(err);
-  });
-*/
 
 findStatefulComponents(ast)
 
