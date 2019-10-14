@@ -10,7 +10,7 @@ class Stateful extends Component {
       <div>
           <h1>Header 1</h1>
           <Query getUser={GET_USER}/>
-          <InnerComponent/>
+          <InnerComponent testUser={TEST_USER}/>
           <Foo/>
       </div>
     );

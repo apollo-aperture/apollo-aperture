@@ -1,10 +1,24 @@
-const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
-const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
+const htmlElementsToIgnore = require('../traverse/util/htmlElementsToIgnore');
 
-function traverseAst(ast) {
-  const cache = [];
-  return new Promise((resolve) => {
+function findStatefulComponents(ast) {
+  const hierarchyContainer = {
+    name: '',
+    children: [],
+  };
+
+  const addChildren = componentName => {
+    let count = 1;
+    if (componentName === 'Query') {
+      hierarchyContainer.name = 'Query' + count;
+      count++;
+    } else {
+      hierarchyContainer.children.push({ name: componentName });
+    }
+  };
+
+  function statefulTraversal(ast) {
+    const cache = [];
     const visitorUtility = {
       ClassDeclaration(path) {
         path.traverse({
@@ -30,14 +44,28 @@ function traverseAst(ast) {
         });
       },
     };
-
     traverse(ast, {
       enter(path) {
         path.traverse(visitorUtility);
       },
     });
-    resolve(cache);
-  });
+    return cache;
+  }
+  
+  const filterNodes = (nodes, hierarchy) => {
+    nodes
+      .filter(node => node.node.type === 'JSXIdentifier')
+      .filter(innerNode => {
+        if (!htmlElementsToIgnore[ innerNode.node.name ]){
+          addChildren(innerNode.node.name, hierarchy);
+        }
+      });
+  };
+
+  const statefulNodes = statefulTraversal(ast);
+  filterNodes(statefulNodes)
+  //return hierarchyContainer;
+  console.log(hierarchyContainer);
 }
 
-module.exports = traverseAst;
+module.exports = findStatefulComponents;

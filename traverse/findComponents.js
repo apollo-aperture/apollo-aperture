@@ -8,7 +8,16 @@ const stateful = require('./stateful');
 const fs = require('fs');
 
 const addChildren = (componentName, hierarchy) => {
-  hierarchy.Query.push({ name: componentName });
+  // hierarchy.Query.push({ name: componentName })
+  let count = 1;
+
+  if(componentName === 'Query'){
+    hierarchy.name = 'Query' + count;
+    count++;
+  } else {
+    hierarchy.children.push({ name: componentName });
+  }
+  
 };
 
 function statefulTraversal(ast) {
@@ -50,10 +59,9 @@ const filterNodes = (nodes, hierarchy) => {
   nodes
     .filter(node => node.node.type === 'JSXIdentifier')
     .filter(innerNode => {
-      if (innerNode.node.name === 'Query') {
-        console.log(true);
+      if (!htmlElementsToIgnore[ innerNode.node.name ]){
+        addChildren(innerNode.node.name, hierarchy);
       }
-      addChildren(innerNode.node.name, hierarchy);
     });
 };
 
@@ -133,11 +141,13 @@ const findQueries = (ast, hierarchy) => {
 const findComponents = (ast, hierarchy) => {
   const statefulNodes = statefulTraversal(ast);
   filterNodes(statefulNodes, hierarchy);
-  statelessTraversal.default(ast, hierarchy); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
+  //statelessTraversal.default(ast, hierarchy); // checked if the ast is a stateless component. if yes, then it returns hierarchy// ['Launches']
   // const queryNode = queryTraversal(ast); // ['Query' - children 'DateOfLaunch', 'Launches']
   // Query
   // 1st child - Launch Sites - child component - Launch date -
   // {Query: 'Launches', children: ['Laun']}
 };
+
+
 
 module.exports = findComponents;
