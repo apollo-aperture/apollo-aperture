@@ -4,10 +4,12 @@ const path = require('path');
 const traverseFiles = require('./traverseFiles');
 const findStatelessComponents = require('./stateless');
 const findComponents = require('./findComponents');
+const findStatefulComponents = require('./stateful');
+
 
 // testing purposes//
-// const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
-const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateless.js');
+const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
+//const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateless.js');
 const file = fs.readFileSync(filePath, 'utf8');
 const ast = parser.parse(file, {
   sourceType: 'module',
@@ -17,7 +19,8 @@ const ast = parser.parse(file, {
 
 // Main container of our components
 const hierarchyContainer = {
-  Query: [],
+  name: '',
+  children: [],
 };
 
 async function init(filePath) {
@@ -43,6 +46,7 @@ async function init(filePath) {
         findComponents(ast, hierarchyContainer);
         // run a function to find stateless components
         const statelessComponents = findStatelessComponents(ast);
+        const statefulComponents = findStatefulComponents(ast);
         // run a function to find stateful components
         // 1 - react component Launches
         // 2 - react component DateOfLaunch
@@ -59,26 +63,7 @@ async function init(filePath) {
   }
 }
 
-/*
-traverseFiles('../samples/spacex/src/components/Launches.js')
-  .then(files => {
-    files.forEach(file => {
-      assembleComponents(file)
-        .then(ast => {
-          console.log('ast', ast);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
-  })
-  .catch(err => {
-    console.log(err);
-  });
-*/
 
-findComponents(ast, hierarchyContainer);
-
-console.log(hierarchyContainer);
+findStatefulComponents(ast)
 
 module.exports = init;
