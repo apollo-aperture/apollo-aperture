@@ -6,17 +6,6 @@ const findStatelessComponents = require('./stateless');
 const findComponents = require('./findComponents');
 const findStatefulComponents = require('./stateful');
 
-
-// testing purposes//
-const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateful.js');
-//const filePath = path.join(__dirname, '..', 'samples', 'test_cases', 'stateless.js');
-const file = fs.readFileSync(filePath, 'utf8');
-const ast = parser.parse(file, {
-  sourceType: 'module',
-  plugins: ['jsx'],
-});
-// testing purposes//
-
 // Main container of our components
 const hierarchyContainer = {
   name: '',
@@ -25,15 +14,8 @@ const hierarchyContainer = {
 
 async function init(filePath) {
   try {
-    // get array of file names
     const files = await traverseFiles(filePath);
-    // for each file, read it
-    // then run it through the AST traversal
-    // then use the output of the traversal to add to the hierarchy
 
-    // const hierarchy = new HierarchyConstructor();
-
-    // files ['lauches.js', 'dateOfLaunch.js', 'query.js']
     files.forEach(file => {
       fs.readFile(file, 'utf8', (err, data) => {
         if (err) return err;
@@ -42,11 +24,11 @@ async function init(filePath) {
           plugins: ['jsx'],
         });
 
-        // process ast for each file
-        findComponents(ast, hierarchyContainer);
-        // run a function to find stateless components
-        const statelessComponents = findStatelessComponents(ast);
-        const statefulComponents = findStatefulComponents(ast);
+        // findComponents(ast, hierarchyContainer);
+        // // run a function to find stateless components
+        const newHierarchy = findStatefulComponents(ast, hierarchyContainer);
+        // const statelessComponents = findStatelessComponents(ast);
+        // const statefulComponents = findStatefulComponents(ast);
         // run a function to find stateful components
         // 1 - react component Launches
         // 2 - react component DateOfLaunch
@@ -64,6 +46,6 @@ async function init(filePath) {
 }
 
 
-findStatefulComponents(ast)
+// findStatefulComponents(ast)
 
 module.exports = init;
