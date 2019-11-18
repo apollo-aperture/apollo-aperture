@@ -1,10 +1,12 @@
 {
 //  "extends": ["plugin:prettier/recommended", "prettier/react","airbnb", "prettier/react", "plugin:react/recommended"],
   "extends": [
+    "plugin:react/recommended",
     "airbnb",
     "prettier",
     "plugin:prettier/recommended",
-    "prettier/react"
+    "prettier/react",
+    "prettier/standard"
   ],
   "parserOptions": {
     "ecmaFeatures": {
