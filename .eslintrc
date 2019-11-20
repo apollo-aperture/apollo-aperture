@@ -18,12 +18,12 @@
     "node": true,
     "jest": true
   },
-//  "plugins": ["prettier", "react"],
+  "plugins": ["prettier", "react"],
   "rules": {
-    "comma-dangle": ["warn", {
-      "functions": "never",
-      "objects": "always-multiline"
-    }],
+//    "comma-dangle": ["warn", {
+//      "functions": "never",
+//      "objects": "always-multiline"
+//    }],
     "array-callback-return": "off",
     "implicit-arrow-linebreak": "warn",
     "prettier/prettier": "warn",
