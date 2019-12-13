@@ -3,6 +3,15 @@ const path = require('path');
 const parser = require('@babel/parser');
 const findStatelessComponents = require('../traverse/stateless');
 
+function generateASTFromPath(pathInput) {
+  const filePath = path.join(__dirname, pathInput);
+  const file = fs.readFileSync(filePath, 'utf8');
+  return parser.parse(file, {
+    sourceType: 'module',
+    plugins: ['jsx'],
+  });
+}
+
 function generateAST(file) {
   return parser.parse(file, {
     sourceType: 'module',
@@ -10,32 +19,36 @@ function generateAST(file) {
   });
 }
 
-const filePath = path.join(__dirname, '../samples/test_cases/stateless.js');
-const file = fs.readFileSync(filePath, 'utf8');
-const noInnerStatelessComponents = `const foo = () => (
-  <div>Hello World</div>
-);
-
-export default foo;`;
+const filePathConstants = {
+  stateless: '../samples/test_cases/stateless.js',
+  statelessWithQuery: '../samples/test_cases/statelessWithQuery.js',
+};
 
 describe('find stateless components', () => {
-  it('finds a file', () => {
-    const statelessAST = generateAST(file);
-    expect(findStatelessComponents(statelessAST))
-      .toEqual(
-        {
-        Query: [
-          {
-            name: 'InnerStateless',
-          },
-        ],
-      }
-      );
+  it('Does not find any inner components', () => {
+    const noInnerStatelessComponents = `const foo = () => (
+      <div>Hello World</div>
+    );
+    export default foo;`;
+    const ast = generateAST(noInnerStatelessComponents);
+    const result = findStatelessComponents(ast);
+    expect(result).toEqual([]);
   });
-  it('Does not find any components', () => {
-    const noComponents = generateAST(noInnerStatelessComponents);
-    expect(findStatelessComponents(noComponents)).toEqual({
-      Query: [],
-    });
+  it('finds a single component without a query', () => {
+    // const filePath = path.join(__dirname, filePathConstants.stateless);
+    // const file = fs.readFileSync(filePath, 'utf8');
+    // const ast = generateAST(file);
+    const ast = generateASTFromPath(filePathConstants.stateless);
+    const result = findStatelessComponents(ast);
+    expect(result).toEqual(['InnerStateless']);
+  });
+  it('finds a stateless component with a query', () => {
+    // const filePath = path.join(__dirname, filePathConstants.statelessWithQuery);
+    // const file = fs.readFileSync(filePath, 'utf8');
+    // const ast = generateAST(file);
+    const ast = generateASTFromPath(filePathConstants.statelessWithQuery);
+    const result = findStatelessComponents(ast);
+    console.log('result', result);
+    expect(1).toEqual(1);
   });
 });

@@ -1,6 +1,7 @@
 import {React} from 'react';
+import GET_STATELESSUSER from '../queries'; // file does not actually exist
 
-const Stateless = () => (
+const StatelessWithQuery = () => (
   <div>
     <InnerStateless/>
   </div>
@@ -13,4 +14,4 @@ const InnerStateless = () => (
   </div>
 );
 
-export default Stateless;
+export default StatelessWithQuery;

@@ -1,21 +1,46 @@
+/**
+ * ************************************
+ *
+ * @description Generate a hierarchy object to be consumed by D3
+ * It should be returned in the following format:
+ * [{
+ *   'name': 'Query1',
+ *   'children': [ 'foo', 'bar' ]
+ * },
+ * {
+ *   'name': 'Query2',
+ *   'children': [ 'foo2', 'bar2' ]
+ * }]
+ *
+ * ************************************
+ */
+
 const fs = require('fs');
 const parser = require('@babel/parser');
-const path = require('path');
 const traverseFiles = require('./traverseFiles');
 const findStatelessComponents = require('./stateless');
-const findComponents = require('./findComponents');
+// const findComponents = require('./findComponents');
 const findStatefulComponents = require('./stateful');
 
-// Main container of our components
-const hierarchyContainer = {
-  name: '',
-  children: [],
-};
+// Assemble array of queries and components found in different files
+// into an array that can be consumed by D3
+function assembleHierarchy(queryComponentArray) {
+  // Code for assembly is pending
+  return [
+    {
+      name: 'Query1',
+      children: ['foo', 'bar'],
+    },
+  ];
+}
 
 async function init(filePath) {
   try {
+    // invoke traverseFiles to get an array of file names
     const files = await traverseFiles(filePath);
 
+    const queriesAndComponents = [];
+    // generate an AST of each file
     files.forEach(file => {
       fs.readFile(file, 'utf8', (err, data) => {
         if (err) return err;
@@ -24,28 +49,20 @@ async function init(filePath) {
           plugins: ['jsx'],
         });
 
-        // findComponents(ast, hierarchyContainer);
-        // // run a function to find stateless components
-        const newHierarchy = findStatefulComponents(ast, hierarchyContainer);
-        // const statelessComponents = findStatelessComponents(ast);
-        // const statefulComponents = findStatefulComponents(ast);
-        // run a function to find stateful components
-        // 1 - react component Launches
-        // 2 - react component DateOfLaunch
-        // 3 - Apollo Query - that has Launches and DateOfLaunch as child components
-        // {Query: 'LaunchQuery', children: ['Launches', 'DateOfLaunch']}
+        // run it through our ASt processors to find React Components
+        // invoke a function to find stateful components
+        queriesAndComponents.push(findStatefulComponents(ast));
+        // invoke a function to find stateless components
+        queriesAndComponents.push(findStatelessComponents(ast));
       });
     });
-    // return hierarchy;
-    return hierarchyContainer;
-    // add each query or component to the hierarchy constructor
+
+    // using the array of queries and components,
+    // merge them using assembleHierarchy
+    return assembleHierarchy(queriesAndComponents);
   } catch (err) {
     return err;
-    // console.log(err);
   }
 }
-
-
-// findStatefulComponents(ast)
 
 module.exports = init;
