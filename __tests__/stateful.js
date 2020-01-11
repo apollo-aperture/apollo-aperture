@@ -5,21 +5,38 @@ const parser = require('@babel/parser');
 // const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
 const findStatefulComponents = require('../traverse/stateful');
 
-function generateAST(file) {
-    return parser.parse(file, {
-      sourceType: 'module',
-      plugins: ['jsx'],
-    });
-  }
-  
-  const filePath = path.join(__dirname, '../samples/test_cases/stateful.js');
-  // const filePath = path.join(__dirname, '../samples/test_cases/statefulInlineQuery.js');
+function generateASTFromPath(pathInput) {
+  const filePath = path.join(__dirname, pathInput);
   const file = fs.readFileSync(filePath, 'utf8');
+  return parser.parse(file, {
+    sourceType: 'module',
+    plugins: ['jsx'],
+  });
+}
 
-  describe('find stateful components', () => {
-    it('finds React components', () => {
-      const statefulAST = generateAST(file);
-      const result = findStatefulComponents(statefulAST);
-      expect(result).toEqual({name: 'Query1', children: ['InnerComponent', 'Foo']});
+
+function generateAST (file) {
+  return parser.parse(file, {
+    sourceType: 'module',
+    plugins: ['jsx']
+  });
+}
+
+const filePathConstants = {
+  stateful: '../samples/test_cases/stateful.js'
+};
+
+// const filePath = path.join(__dirname, '../samples/test_cases/stateful.js');
+// const filePath = path.join(__dirname, '../samples/test_cases/statefulInlineQuery.js');
+// const file = fs.readFileSync(filePath, 'utf8');
+
+describe('find stateful components', () => {
+  it('finds React components', () => {
+    const ast = generateASTFromPath(filePathConstants.stateful);
+    const result = findStatefulComponents(ast);
+    expect(result).toEqual({
+      name: 'Query1',
+      children: ['InnerComponent', 'Foo']
     });
   });
+});

@@ -48,7 +48,6 @@ describe('find stateless components', () => {
     // const ast = generateAST(file);
     const ast = generateASTFromPath(filePathConstants.statelessWithQuery);
     const result = findStatelessComponents(ast);
-    console.log('result', result);
-    expect(1).toEqual(1);
+    expect(result).toEqual(['InnerStateless', 'Query']);
   });
 });
