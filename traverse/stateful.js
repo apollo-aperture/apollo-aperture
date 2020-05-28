@@ -31,10 +31,52 @@ function statefulTraversal(ast) {
       });
     },
   };
+  const newUtility = {
+    // Only gets JSX Elements inside of a Class Declaration
+    ClassDeclaration(path) {
+      path.traverse({
+        ClassBody(path) {
+          path.traverse({
+            ClassMethod(path) {
+              path.traverse({
+                BlockStatement(path) {
+                  path.traverse({
+                    ReturnStatement(path) {
+                      path.traverse({
+                        JSXElement(path) {
+                          if (
+                            !htmlElementsToIgnore[
+                              path.node.openingElement.name.name
+                            ] &&
+                            path.parent.type !== 'CallExpression'
+                          ) {
+                            cache.push(path.node.openingElement.name.name);
+                          }
+                        },
+                      });
+                    },
+                  });
+                },
+              });
+            },
+          });
+        },
+      });
+    },
+    // JSXElement(path) {
+    //   if (
+    //     !htmlElementsToIgnore[path.node.openingElement.name.name] &&
+    //     path.parent.type !== 'CallExpression'
+    //   ) {
+    //     cache.push(path.node.openingElement.name.name);
+    //   }
+    // },
+  };
   // console.log(ast);
   traverse(ast, {
     enter(path) {
-      path.traverse(visitorUtility);
+      // path.traverse(visitorUtility);
+      path.traverse(newUtility);
     },
   });
   return cache;

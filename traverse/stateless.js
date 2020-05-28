@@ -1,6 +1,19 @@
 const traverse = require('@babel/traverse').default;
 const htmlElementsToIgnore = require('../traverse/util/htmlElementsToIgnore');
 
+function findStatelessComponents(ast) {
+  const { body } = ast.program;
+  // find nodes with variable declarations
+  const variableDeclarations = body.filter(
+    node => node.type === 'VariableDeclaration'
+  );
+  // in each node, see if the body contains JSX
+  // Function body with JSX Element
+  
+};
+
+module.exports = findStatelessComponents;
+
 /*function findStatelessComponents(ast) {
   const cache = [];
   traverse(ast, {
@@ -26,7 +39,7 @@ const htmlElementsToIgnore = require('../traverse/util/htmlElementsToIgnore');
   return cache;
 }*/
 
-function statelessTraversal(ast) {
+/* function statelessTraversal(ast) {
   const cache = [];
   traverse(ast, {
     VariableDeclarator(path) {
@@ -51,4 +64,4 @@ function statelessTraversal(ast) {
   return cache;
 }
 
-module.exports = statelessTraversal;
+module.exports = statelessTraversal; */
