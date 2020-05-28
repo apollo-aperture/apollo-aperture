@@ -34,6 +34,16 @@ describe('find stateless components', () => {
     const result = findStatelessComponents(ast);
     expect(result).toEqual([]);
   });
+  it('Uses the new stateless query', () => {
+    const ast = generateASTFromPath(filePathConstants.stateless);
+    const result = findStatelessComponents(ast);
+    expect(result).toEqual([
+      {
+        name: 'Stateless',
+        children: ['InnerStateless'],
+      },
+    ]);
+  });
   it('finds a single component without a query', () => {
     // const filePath = path.join(__dirname, filePathConstants.stateless);
     // const file = fs.readFileSync(filePath, 'utf8');
