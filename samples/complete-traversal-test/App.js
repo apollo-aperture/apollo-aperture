@@ -2,6 +2,37 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ImportedComponent from './Components/Component';
+import DisplayText from './Components/DisplayText';
+
+const arrToDisplay = [
+  {
+    idx: 0,
+    text: 'Foo',
+  },
+  {
+    idx: 1,
+    text: 'Bar',
+  },
+  {
+    idx: 2,
+    text: 'Woo',
+  },
+];
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
+//   render() {
+//     return(
+//       <div>
+//         <div>
+//           <ImportedComponent />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +42,10 @@ class App extends Component {
     return(
       <div>
         <ImportedComponent />
+        <p>Here is a text node that should be ignored</p>
+        {arrToDisplay.map(el => (
+          <DisplayText idx={el.idx} text={el.text} />
+        ))}
       </div>
     );
   }
