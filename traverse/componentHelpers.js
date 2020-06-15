@@ -97,33 +97,50 @@ const htmlElementsToIgnore = {
 // find JSX inside of code blocks inside of a react component
 helpers.findJSXExpressionContainer = function findJSXExpressionContainer(node) {
   if (node.type === constants.jsx.JSXExpressionContainer) return true;
-}
+};
 
 helpers.getBlockStatement = function getBlockStatement(node) {
   node = Array.isArray(node) ? node[0] : node;
-  if (node.body && node.body.type && node.body.type === constants.generic.BlockStatement) {
+  if (
+    node.body &&
+    node.body.type &&
+    node.body.type === constants.generic.BlockStatement
+  ) {
     return node.body;
   }
   return undefined;
-}
+};
 
 helpers.getReturnStatementNode = function getReturnStatementNode(node) {
   if (node.body && node.body.length > 0) {
     for (let i = 0; i < node.body.length; i++) {
       const currentNode = node.body[i];
-      if (currentNode.type === constants.generic.ReturnStatement) return currentNode;
+      if (currentNode.type === constants.generic.ReturnStatement)
+        return currentNode;
     }
   }
   return null;
-}
+};
 
-// improved version of isComponentInChildren
-// finds if component exists and if so,
-// assembles a hierarchy of
-helpers.listComponentsInChildren = function listComponentsInChildren(node) {
+// assembles a hierarchy of components
+helpers.componentsInChildren = function listComponentsInChildren(node) {};
 
-}
-// TODO: add helper to recursively check for components in children of children
+helpers.findImportedComponents = (node, fileImports, hierarchy) => {
+  // console.log('fileImports: ', fileImports);
+  // for each filename in fileImports[i].defaultImport and
+  // for each filename in fileImports[i].namedImports[j]
+  // find them inside the node and add create their hierarchy
+  fileImports.forEach(fileImport => {
+    const { defaultImport } = fileImport;
+    // look for the defaultImport value in the node
+    if (helpers.isComponentInChildren(node, defaultImport)) {
+      hierarchy.addComponentNode(defaultImport);
+    }
+  });
+  // return hierarchy;
+};
+
+// finds a named component
 helpers.isComponentInChildren = function isComponentInChildren(
   node,
   componentName
