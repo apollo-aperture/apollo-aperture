@@ -1,3 +1,7 @@
+/**
+ * @file Assembles an array of variables imported from a file
+ * ignores npm packages
+ */
 const path = require('path');
 
 function getFileImportNodes(body) {
