@@ -1,12 +1,14 @@
 const path = require('path');
 const genASTProgramBody = require('./genASTProgramBody');
 
-const assembleFileImports = require('./detectFileImports');
+const assembleFileImports = require('./assembleFileImports');
 const getReactDOMInfo = require('./getReactDOMInfo');
 const checkForApp = require('./checkInReactDOMNode');
 
 const getClassDeclarations = require('./getClassDeclarations');
-const hasApolloProvider = require('./hasApolloProvider');
+// const hasApolloProvider = require('./hasApolloProvider');
+const { hasApolloProvider } = require('./apollo');
+const {findImportedComponents} = require('./componentHelpers');
 const classComponents = require('./classComponents');
 
 // location of react's index.js file
@@ -35,23 +37,34 @@ const hierarchy = {
   },
 };
 
-if (reactDOMInfo.hasReactDOMNode) {
+if (reactDOMInfo) {
   if (hasApolloProvider(astProgramBody)) {
-    const fileImports = assembleFileImports(
+
+    const indexFileImports = assembleFileImports(
       reactProjectDirectory,
       astProgramBody
     );
 
-    // find apollo component
-    const reactDOMNode = reactDOMInfo.reactDOMNode;
+    // look through react dom node
+    // then create hierarchy of react components
+    // then look up imports to find components that match
+    // and then visit the files to assemble the hierarchy
+    findImportedComponents(reactDOMInfo, indexFileImports, hierarchy);
+    console.log('hierarchy: ', hierarchy);
 
 
     // iterate through fileImports and examine hierarchy in each imported file
-    fileImports.forEach(fileImport => {
+    /*fileImports.forEach(fileImport => {
       console.log('fileImport: ', fileImport);
-    });
+      // when going through client.js, it shouldn't return anything
+      // because it doesn't have any class or functional components
+
+    });*/
 
     // appName = object with filename, defaultImport, and imports array
+
+
+
     // old version
     /*const appName = fileImports.reduce((acc, file) => {
       // look for App component
