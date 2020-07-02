@@ -31,6 +31,7 @@ function findJSXElement(reactNode) {
   return arguments[JSXElementIndex];
 }
 
+// checks if a React Component exists in a given node
 function checkForApp(reactNode, appElement) {
   const jsxElement = findJSXElement(reactNode);
   return findReactComponent(jsxElement, appElement);
