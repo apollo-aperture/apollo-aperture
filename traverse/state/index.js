@@ -1,71 +1,73 @@
-/*
- * State example
- * {
- *  hierarchy: {
- *    component: 'App',
- *    children: [
- *      {
- *        component: 'Foo',
- *         children: [
- *           {
- *             component: 'Bar',
- *             children: []
- *           }
- *         ]
- *       }
- *     ]
- *   }
- *   queries: [
- *     {
- *       query: 'getUser',
- *       children: [
- *         {
- *           component: 'Woo',
- *           children: [
- *             {
- *               component: 'Boo',
- *               children: []
- *             }
- *           ]
- *         }
- *       ],
- *     }
- *   ]
- * }
- * */
+/*{
+  currentParent: 'Pets',
+  hierarchy: {
+    reactComponent: 'React',
+      children: [{
+      reactComponent: 'Pets',
+      children: [
+        {
+          reactComponent: 'Cats',
+          children: [],
+        },
+        {
+          reactComponent: 'Dogs',
+          children: [
+            {
+              reactComponent: 'Spot',
+              children: [
+                {
+                  reactComponent: 'Henry',
+                  children: [],
+                }
+              ]
+            }
+          ]
+        }
+      ],
+    }],
+  },
+  queries: [
+    {
+      queryName: 'findDogs',
+      components: [
+        {
+          reactComponent: 'DogsDisplay',
+          children: [
+            {
+              reactComponent: 'Dog',
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};*/
 
-class BaseComponent {
-  constructor() {
-    this.children = [];
-  }
-
-  addChildComponent(name) {
-    this.children.push(new Component(name));
-  }
-}
-
-class Component extends BaseComponent {
-  constructor(componentName) {
-    super();
-    this.componentName = componentName;
-  }
-
-  getComponent() {
-    return this;
-  }
-}
-
-class Query extends BaseComponent {
-  constructor(queryName) {
-    super();
-    this.query = queryName;
-  }
-}
+// class ReactComponent {
+//   constructor(componentName) {
+//     this.reactComponent = componentName;
+//     this.children = [];
+//   }
+//   addChildComponent(componentName) {
+//     const newComponentName = new ReactComponent(componentName);
+//     this.children.push(newComponentName);
+//   }
+// }
+//
+// class Query {
+//   constructor(queryName) {
+//     this.queryName = queryName;
+//     this.components = [];
+//   }
+//   addReactComponent(componentName) {
+//     const newComponentName = new ReactComponent(componentName);
+//     this.components.push(newComponentName);
+//   }
+// }
 
 const initialState = {
-  parentComponent: null,
-  currentQuery: null,
-  hierarchy: [],
+  hierarchy: null,
   queries: [],
 };
 
@@ -91,45 +93,18 @@ const store = reducer => {
 const reducer = (prevState = initialState, action) => {
   if (action) {
     switch (action.type) {
-      case 'setParent': {
+      case 'updateHierarchy': {
         return {
           ...prevState,
-          parentComponent: action.payload,
+          hierarchy: action.payload
         }
       }
       case 'setQuery': {
         return {
           ...prevState,
-          currentQuery: action.payload,
-        }
-      }
-      case 'addComponent': {
-        const newComponent = new Component(action.payload);
-        const { hierarchy } = { ...prevState };
-        hierarchy.push(newComponent);
-
-        return {
-          ...prevState,
-          hierarchy,
+          currentQuery: action.payload
         };
       }
-      case 'addComponentChild': {
-        const newComponent = new Component(action.payload);
-        const { hierarchy } = { ...prevState };
-        hierarchy[hierarchy.length - 1].children.push(newComponent);
-        return {
-          ...prevState,
-          hierarchy,
-        };
-      }
-      // if (prevState.hierarchy.length < 1) {
-      //   const newStateHierarchy = {...prevState}.hierarchy;
-      //   newStateHierarchy.push(newComponent);
-      //   return {
-      //     ...prevState,
-      //     hierarchy: newStateHierarchy
-      //   };
-      // }
       default:
         return prevState;
     }

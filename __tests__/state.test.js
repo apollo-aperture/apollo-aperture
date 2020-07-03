@@ -2,23 +2,43 @@ const appState = require('../traverse/state');
 
 it('returns the default state', () => {
   expect(appState.getState()).toEqual({
-    parentComponent: null,
-    currentQuery: null,
-    hierarchy: [],
+    hierarchy: null,
     queries: [],
   });
 });
 
-it('sets the parent component', () => {
-  appState.dispatch({
-    type: 'setParent',
-    payload: 'foo',
+describe('update the hierarchy', () => {
+  const newHierarchy = {
+    reactComponent: 'Foo',
+    children: [],
+  };
+  it('adds a top level component', () => {
+    const action = {
+      type: 'updateHierarchy',
+      payload: newHierarchy,
+    };
+    appState.dispatch(action);
+    expect(appState.getState()).toEqual({
+      hierarchy: newHierarchy,
+      queries: [],
+    });
   });
-  expect(appState.getState()).toEqual({
-    parentComponent: 'foo',
-    currentQuery: null,
-    hierarchy: [],
-    queries: [],
+  it('adds another component', () => {
+    const secondHierarchy = { ...newHierarchy };
+    secondHierarchy.children.push({
+      reactComponent: 'Bar',
+      children: [],
+    });
+    console.log('secondHierarchy: ', secondHierarchy);
+    const action = {
+      type: 'updateHierarchy',
+      payload: secondHierarchy,
+    };
+    appState.dispatch(action);
+    expect(appState.getState()).toEqual({
+      hierarchy: secondHierarchy,
+      queries: [],
+    });
   });
 });
 
