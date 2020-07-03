@@ -1,12 +1,84 @@
 const helpers = {};
 const constants = require('./constants');
 const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
+const Hierarchy = require('./util/hierarchy');
 
-// every helper function should have a contains method and a return nodes method
-// 1. intake AST node and if the desired node is found
-// 2. then return nodes that match - should also return an object of the different
-// nodes that are children - SHOULD THIS BE A LINKED LIST?
-// 3. if not, then return false or undefined
+// class Hierarchy {
+//   constructor(componentName) {
+//     this.reactComponent = componentName;
+//     this.children = [];
+//   }
+//   pushChildHierarchy(hierarchy) {
+//     this.children.push(hierarchy);
+//   }
+// }
+
+function findComponentInNode(node, componentName) {
+  return (
+    node.openingElement &&
+    node.openingElement.name &&
+    node.openingElement.name.name &&
+    node.openingElement.name.name === componentName
+  );
+}
+
+// does not assemble hierarchy containing React and/or ApolloProvider
+helpers.generateComponentTreeFromJSXElement = function generateComponentTreeFromJSXElement(
+  node
+) {
+  function isValidNode(node) {
+    return (
+      node.openingElement &&
+      node.openingElement.name &&
+      node.openingElement.name.name &&
+      !htmlElementsToIgnore[node.openingElement.name.name]
+    );
+  }
+
+  function genTree(node, hierarchy = { reactComponent: null, children: [] }) {
+    // React
+    if (
+      node.openingElement &&
+      node.openingElement.name &&
+      node.openingElement.name.object &&
+      node.openingElement.name.object.name &&
+      node.openingElement.name.object.name === 'React'
+    ) {
+      hierarchy.reactComponent = 'React';
+    }
+    // base case
+    // find self closing elements
+    // A self-closing element will not have any children
+    // unless they're defined as a separate react component (function or variable declaration)
+    // or they're in another file
+    // if they're in another file, the file will need to be visited,
+    // and a hierarchy will need to be assembled
+    // and merged into the higher hierarchy
+    if (node.openingElement && node.openingElement.selfClosing) {
+      if (isValidNode(node)) {
+        // could be a variable declaration or
+        // it could be an import from another file
+        
+        // old version just checked the current structure
+        hierarchy.reactComponent = node.openingElement.name.name;
+        return hierarchy;
+      }
+    }
+    if (isValidNode(node)) {
+      hierarchy.reactComponent = node.openingElement.name.name;
+    }
+    for (let i = 0; i < node.children.length; i++) {
+      const curr = node.children[i];
+      // this ignores JSXText elements
+      if (curr.type === 'JSXElement') {
+        hierarchy.children.push(genTree(curr));
+      }
+    }
+    return hierarchy;
+  }
+
+  return genTree(node);
+};
 
 // find JSX inside of code blocks inside of a react component
 helpers.findJSXExpressionContainer = function findJSXExpressionContainer(node) {
@@ -22,7 +94,7 @@ helpers.getBlockStatement = function getBlockStatement(node) {
   ) {
     return node.body;
   }
-  return undefined;
+  return null;
 };
 
 helpers.getReturnStatementNode = function getReturnStatementNode(node) {
@@ -35,11 +107,6 @@ helpers.getReturnStatementNode = function getReturnStatementNode(node) {
   }
   return null;
 };
-
-// assembles a hierarchy of components
-helpers.loadASTFromDefaultImport = (reactProjectDirectory, filename) => {
-
-}
 
 helpers.importedComponentsInFileImports = (node, fileImports, appState) => {
   // the first time this runs, this is the top level file (index.js)
@@ -72,7 +139,7 @@ helpers.importedComponentsInFileImports = (node, fileImports, appState) => {
   });
 };
 
-// finds a named component
+// finds a named component in current node or in children of node
 helpers.isComponentInChildren = function isComponentInChildren(
   node,
   componentName
