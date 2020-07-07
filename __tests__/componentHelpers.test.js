@@ -54,16 +54,19 @@ it('finds React components inside of a JSX Expression', () => {
 it('finds React and Apollo Components', () => {
   const ast = getAST('reactAndApollo.js');
   const node = ast.program.body[0].expression;
-  const result = helpers.generateReactApolloHierarchy(node);
-  expect(result.hierarchy).toEqual({
+  const result = helpers.generateComponentTreeFromJSXElement(node);
+  expect(result).toEqual({
     reactComponent: 'React',
     children: [
       {
         reactComponent: 'ApolloProvider',
-        children: [],
+        children: [{
+          reactComponent: 'App',
+          children: []
+        }],
       },
     ],
   });
-  expect(result.node).toHaveProperty('type');
-  expect(result.node.type).toEqual('JSXElement');
+  // expect(result.node).toHaveProperty('type');
+  // expect(result.node.type).toEqual('JSXElement');
 });
