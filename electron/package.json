@@ -21,7 +21,7 @@
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
-    "electron": "^5.0.6",
+    "electron": "^7.2.4",
     "electron-builder": "^20.44.4",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
