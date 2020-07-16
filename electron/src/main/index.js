@@ -17,7 +17,10 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let mainWindow
 
 function createMainWindow() {
-  const window = new BrowserWindow({webPreferences: {
+  const window = new BrowserWindow({
+    width: 1400,
+    height: 900,
+    webPreferences: {
       nodeIntegration: true,
       // preload: __dirname + '/preload.js',
     }});
