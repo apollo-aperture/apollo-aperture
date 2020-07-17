@@ -6,9 +6,8 @@ import { format as formatUrl } from 'url'
 
 import returnAST from './traverse';
 
-ipcMain.on('async-message', (event, arg) => {
-  console.log('arg :', arg);
-  event.reply('async-reply', returnAST(arg));
+ipcMain.on('react-index', (event, arg) => {
+  event.reply('hierarchy-result', returnAST(arg));
 });
 
 const isDevelopment = process.env.NODE_ENV !== 'production'

@@ -20,6 +20,7 @@ export const StyledButton = styled.button`
   border: 1px solid #d7d7d7;
   border-radius: 3px;
   cursor: pointer;
+  outline: none;
   transition: background-color .2s;
   :hover {
     transition: background-color .2s;

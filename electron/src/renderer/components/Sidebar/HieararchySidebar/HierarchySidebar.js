@@ -1,11 +1,39 @@
-import React from 'react';
-import { SidebarDiv, StyledButton, StyledLink, StyledHr } from './HierarchySidebar.styled';
+import React, { useEffect, useState } from 'react';
+import { ipcRenderer } from 'electron';
+import {
+  SidebarDiv,
+  StyledButton,
+  StyledLink,
+  StyledHr,
+} from './HierarchySidebar.styled';
 import electron from 'electron';
+
 const { dialog } = electron.remote;
 
 const HierarchySidebar = () => {
+  const [message, updateMessage] = useState('foo');
+  useEffect(() => {
+    ipcRenderer.on('hierarchy-result', (event, arg) => {
+      console.log('react reply', arg);
+      updateMessage('updated');
+    });
+  });
   const openDialog = e => {
-    console.log('pressed');
+    e.preventDefault();
+    electron.remote.dialog
+      .showOpenDialog({
+        properties: ['openFile'],
+        filters: [{ name: 'JavaScript Files', extensions: ['js'] }],
+      })
+      .then(result => {
+        if (!result.canceled) {
+          ipcRenderer.send('react-index', result.filePaths[0]);
+        }
+      })
+      .catch(err => {
+        console.log('Error:', err);
+      });
+    // console.log('sent message', ipcRenderer.send('async-message', ));
   };
   return (
     <>
@@ -15,7 +43,7 @@ const HierarchySidebar = () => {
           Select index.js file
         </StyledButton>
       </div>
-      <StyledHr/>
+      <StyledHr />
       <div>
         <p>Open a sample project:</p>
         <StyledLink to="">SpaceX</StyledLink>
