@@ -21,13 +21,13 @@ function assembleHierarchy(
       // look up in variables
       if (variableHierarchies[reactComponentName]) {
         // add matching component declared in the hierarchies as a child
-        hierarchyObject.children.push(
+        hierarchyObject.addChildComponent(
           assemble(variableHierarchies[reactComponentName])
         );
         // look in imports
       } else if (importsIdx !== -1) {
         const importHierarchy = traverseFile(imports[importsIdx].filename);
-        hierarchyObject.children.push(importHierarchy);
+        hierarchyObject.addChildComponent(importHierarchy);
       } else {
         return hierarchyObject;
       }

@@ -5,7 +5,7 @@ class Hierarchy {
   }
   setReactComponent(reactComponentName) {
     this.reactComponent = reactComponentName;
-    return this;
+    // return this;
   }
   addChildComponent(hierarchy) {
     this.children.push(hierarchy);
