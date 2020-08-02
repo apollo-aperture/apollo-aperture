@@ -27,7 +27,7 @@ const HierarchySidebar = () => {
       })
       .then(result => {
         if (!result.canceled) {
-          ipcRenderer.send('react-index', result.filePaths[0]);
+          ipcRenderer.send('transmit-react-index', result.filePaths[0]);
         }
       })
       .catch(err => {

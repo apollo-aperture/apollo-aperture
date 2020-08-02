@@ -4,10 +4,8 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
 
-import returnAST from './traverse';
-
-ipcMain.on('react-index', (event, arg) => {
-  event.reply('hierarchy-result', returnAST(arg));
+ipcMain.on('transmit-react-index', (event, completeFilePath) => {
+  event.reply('hierarchy-result', 'reply');
 });
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
