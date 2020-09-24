@@ -1,10 +1,12 @@
 {
 //  "extends": ["plugin:prettier/recommended", "prettier/react","airbnb", "prettier/react", "plugin:react/recommended"],
   "extends": [
+    "plugin:react/recommended",
     "airbnb",
     "prettier",
     "plugin:prettier/recommended",
-    "prettier/react"
+    "prettier/react",
+    "prettier/standard"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,14 +18,14 @@
     "node": true,
     "jest": true
   },
-//  "plugins": ["prettier", "react"],
+  "plugins": ["prettier", "react"],
   "rules": {
-    "comma-dangle": ["warn", {
-      "functions": "never",
-      "objects": "always-multiline"
-    }],
+//    "comma-dangle": ["warn", {
+//      "functions": "never",
+//      "objects": "always-multiline"
+//    }],
     "array-callback-return": "off",
-    "implicit-arrow-linebreak": "warn",
+    // "implicit-arrow-linebreak": "warn",
     "prettier/prettier": "warn",
     "no-param-reassign": "off",
     "arrow-parens": "off",

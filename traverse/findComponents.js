@@ -1,17 +1,14 @@
 // find components - gets a list of various react and apollo components
 // it would do this by invoking functions that get components from stateless, stateful,
-const parser = require('@babel/parser');
 const traverse = require('@babel/traverse').default;
-const path = require('path');
 const htmlElementsToIgnore = require('./util/htmlElementsToIgnore');
-const stateful = require('./stateful');
-const fs = require('fs');
+// const stateful = require('./stateful');
 
 const addChildren = (componentName, hierarchy) => {
   // hierarchy.Query.push({ name: componentName })
   let count = 1;
 
-  if(componentName === 'Query'){
+  if (componentName === 'Query'){
     hierarchy.name = 'Query' + count;
     count++;
   } else {

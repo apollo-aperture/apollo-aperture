@@ -2,42 +2,43 @@
   "name": "apollo_interface",
   "version": "1.0.0",
   "description": "",
-  "main": "./electron.js",
-  "homepage": "./",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack-dev": "webpack-dev-server",
-    "compile": "build --c.extraMetadata.main=electron.js",
-    "dist": "webpack && yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "electron-dev": "concurrently \"npm run webpack-dev\" \"wait-on http://localhost:8080 && npm run electron\"",
-    "electron": "electron .",
-    "webpack": "webpack"
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "src/main"
+    },
+    "renderer": {
+      "template": "src/renderer/index.html",
+      "sourceDirectory": "src/renderer",
+      "webpackConfig": "electron.renderer.additions.js"
+    }
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "electron": "^5.0.6",
-    "electron-builder": "^20.44.4",
-    "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2"
+    "@babel/parser": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "d3": "^5.16.0",
+    "electron": "8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-webpack": "^2.8.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.1.1",
+    "styled-normalize": "^8.0.7",
+    "webpack": "~4.42.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-brands-svg-icons": "^5.9.0",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
-    "@fortawesome/react-fontawesome": "^0.1.4",
-    "concurrently": "^4.1.1",
-    "d3": "^5.9.7",
-    "electron-is-dev": "^1.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "wait-on": "^3.2.0",
-    "webpack": "^4.35.3"
+    "source-map-support": "^0.5.16"
   }
 }
