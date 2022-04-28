@@ -20,7 +20,7 @@
     "@babel/parser": "^7.4.5",
     "apollo-boost": "^0.4.1",
     "apollo-client": "^2.6.1",
-    "cross-fetch": "^3.0.3",
+    "cross-fetch": "^3.1.5",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "node-fetch": "^2.6.0"
